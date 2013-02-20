@@ -48,7 +48,7 @@ class VectorProblem {
 
     String toString() {
         //this.class.name.split("\\.")[-1] + "_" + numValues + "_" + maxIterations
-        this.class.name.split("\\.")[-1] + "_MR" + halfMutationRange
+        this.class.name.split("\\.")[-1] + "_MR"
     }
 
 
