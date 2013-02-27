@@ -5,6 +5,7 @@ class InternalNode extends AbstractNode {
 	def InternalNode(function, listOfChildren){
 		this.function = function
 		children = listOfChildren
+		leafNode = false
 	}
 	
 	def childrenToString(){
@@ -12,7 +13,10 @@ class InternalNode extends AbstractNode {
 		children.each() { toReturn = it.toString() + " " + toReturn }
 	}
 	
-	//TODO
+	def copy(){
+		new InternalNode(function, children)
+	}
+	
 	String toString() {
 		"function: " + function.toString() + " children: " + childrenToString()
 	}

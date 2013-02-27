@@ -8,7 +8,9 @@ class AbstractNode {
 	def value
 	
 	// This is a list of this nodes children
-	def children
+	def children = []
+	
+	def leafNode = true
 	
 	//TODO
 	def eval(variableMap) {

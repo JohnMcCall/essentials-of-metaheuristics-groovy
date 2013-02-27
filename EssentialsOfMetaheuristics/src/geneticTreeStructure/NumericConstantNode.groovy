@@ -6,6 +6,10 @@ class NumericConstantNode extends AbstractNode {
 		this.value = value
 	}
 	
+	def copy(){
+		new NumericConstantNode(value)
+	}
+	
 	String toString(){
 		"Value: " + value
 	}

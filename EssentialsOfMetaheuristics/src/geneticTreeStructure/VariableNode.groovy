@@ -6,6 +6,10 @@ class VariableNode extends AbstractNode {
 		this.value = value
 	}
 	
+	def copy(){
+		new VariableNode(value)
+	}
+	
 	String toString(){
 		"Value: " + value
 	}
