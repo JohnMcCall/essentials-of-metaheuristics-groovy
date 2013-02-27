@@ -24,9 +24,4 @@ class AbstractNode {
 		}
 	}
 	
-	//TODO
-	String toString() {
-		
-	}
-	
 }
