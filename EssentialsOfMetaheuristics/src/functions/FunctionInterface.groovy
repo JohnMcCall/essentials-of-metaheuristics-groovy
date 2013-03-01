@@ -6,6 +6,8 @@ interface FunctionInterface {
 	
 	def doMath
 	
+        def isEqual
+    
 	String toString()
 
 }

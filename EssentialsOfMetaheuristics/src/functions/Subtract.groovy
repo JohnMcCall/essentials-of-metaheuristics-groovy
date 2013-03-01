@@ -9,5 +9,9 @@ class Subtract implements FunctionInterface {
         String toString(){
                 "Name: " + name
         }
+        
+        def isEqual(function) {
+            this.name == function.name
+        }
 
 }

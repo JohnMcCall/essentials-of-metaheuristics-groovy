@@ -108,5 +108,15 @@ class VariousNodeTests extends Specification {
         node2.addChild(constant3)
         node1.size() == 5
     }
+    
+    def "testing isEqual"() {
+        def constant1 = new NumericConstantNode(72)
+        def constant2 = new NumericConstantNode(6)
+        def constant3 = new NumericConstantNode(6)
+        
+        expect:
+        !(constant1.isEqual(constant2))
+        constant2.isEqual(constant3)
+    }
 
 }

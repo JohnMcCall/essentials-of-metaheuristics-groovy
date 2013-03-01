@@ -2,7 +2,7 @@ package geneticTreeStructure
 
 class SubtreeSelection {
 	def root = null
-	// Closure to determine if a node is a leafNode
+	// Closure to determine if a node is a leafNode ---- We should write some other "selecting" functions eventually
 	def isLeaf = {x -> x.leafNode}
 	def counter = 0
 	
@@ -18,7 +18,7 @@ class SubtreeSelection {
 			Random rand = new Random()
 			def randInt = rand.nextInt(counter) + 1
 			counter = 0
-			return pickNode(root, randInt, isLeaf)
+			return pickNodes(root, randInt, isLeaf)
 		}
 	}
 	
@@ -39,8 +39,8 @@ class SubtreeSelection {
 			}
 		}
 		
-		node.children.each{
-			def tempNode = pickNode(it, randInt, func)
+		for(def child: node.children){
+			def tempNode = pickNodes(child, randInt, func)
 			if(tempNode != null) {
 				return tempNode
 			}

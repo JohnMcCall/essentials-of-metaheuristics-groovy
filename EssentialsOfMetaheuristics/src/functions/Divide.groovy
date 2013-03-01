@@ -10,4 +10,7 @@ class Divide implements FunctionInterface {
                 "Name: " + name
         }
 
+        def isEqual(function) {
+            this.name == function.name
+        }
 }

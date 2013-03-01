@@ -35,5 +35,24 @@ class AbstractNode {
             return counter
         }
     }
+    
+    def isEqual(node) {
+        def toReturn = true
+        
+        if(this.value != node.value) {
+            toReturn = false
+        }
+        if(!this.children.equals(node.children)) {
+            toReturn = false
+        }
+        if(!leafNode && !this.function.isEqual(node.function)) {
+            toReturn = false
+        }
+        if(this.leafNode != node.leafNode) {
+            toReturn = false
+        }
+        
+        return toReturn
+    }
 
 }
