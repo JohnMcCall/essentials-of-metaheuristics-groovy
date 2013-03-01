@@ -3,7 +3,7 @@ package geneticTreeStructure
 import functions.*
 import spock.lang.Specification;
 
-class TreeBasedGPTests extends Specification {
+class GeneticTreeTests extends Specification {
     def "test doFull"(){
         def add = new Add()
         def subtract = new Subtract()
@@ -21,7 +21,7 @@ class TreeBasedGPTests extends Specification {
         variableMap.put("y", 9)
 
         def terminalSet = [constant1, constant2, variable1, variable2]
-        def gpTree = new TreeBasedGP()
+        def gpTree = new GeneticTree()
         def root = gpTree.doFull(1, 3, functionSet, terminalSet)
 
         expect:
