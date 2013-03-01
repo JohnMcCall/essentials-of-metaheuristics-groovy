@@ -4,12 +4,11 @@ class TreeBasedGP {
 
     def doFull(depth, max, functionSet, terminalSet){
         if(depth >= max){
-            getRandom(terminalSet).copy()
+            getRandom(terminalSet)
         } else {
-            def node = getRandom(functionSet).copy()
+            def node = getRandom(functionSet)
             def arity = node.function.getArity()
             arity.times{
-                print(depth)
                 node.addChild(doFull(depth+1, max, functionSet, terminalSet))
             }
             return node

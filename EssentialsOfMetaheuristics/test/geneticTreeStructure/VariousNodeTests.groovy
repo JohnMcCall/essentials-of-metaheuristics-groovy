@@ -66,10 +66,13 @@ class VariousNodeTests extends Specification {
         def add = new Add()
         def node = new InternalNode(add, [childNode])
         def copy = node.copy()
+		def newNode = new NumericConstantNode(8)
 
         expect:
         node.function == copy.function
         node.children.equals(copy.children)
+		copy.addChild(newNode)
+		!(node.children.equals(copy.children))
     }
 
     def "testing addChild"(){

@@ -27,14 +27,10 @@ class AbstractNode {
 
     def size(){
         if(children.size() == 0){
-            println(value)
             1
         } else {
-            println(function)
             def counter = 0
             children.each { counter += it.size() }
-            println("counter: " + counter)
-            
             counter++
             return counter
         }

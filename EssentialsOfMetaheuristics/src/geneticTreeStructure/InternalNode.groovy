@@ -14,12 +14,11 @@ class InternalNode extends AbstractNode {
     }
 
     def copy(){
-        new InternalNode(function, children)
+        new InternalNode(function, children.clone())
     }
 
     def addChild(node){
         children.add(node)
-
     }
 
     String toString() {
