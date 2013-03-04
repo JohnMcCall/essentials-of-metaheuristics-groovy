@@ -3,7 +3,7 @@ package geneticTreeStructure
 class GeneticTree {
 	
 	// The node returned by this is the root of the tree
-    def doFull(depth, max, functionSet, terminalSet){
+    def doFull = { depth, max, functionSet, terminalSet ->
         if(depth >= max){
             getRandom(terminalSet)
         } else {

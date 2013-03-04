@@ -4,7 +4,7 @@ class InternalNode extends AbstractNode {
 
     def InternalNode(function, listOfChildren){
         this.function = function
-        children = listOfChildren
+        listOfChildren.each{ addChild(it) }
         leafNode = false
     }
 
@@ -19,6 +19,11 @@ class InternalNode extends AbstractNode {
 
     def addChild(node){
         children.add(node)
+        node.parent = this
+    }
+    
+    def removeChild(node){
+        children = children.minus(node)
     }
 
     String toString() {

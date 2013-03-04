@@ -3,14 +3,12 @@ package geneticTreeStructure
 class AbstractNode {
     // This should be a closure(?)
     def function = null
-
     // Going to be a constant OR a string variable
     def value = null
-
     // This is a list of this nodes children
     def children = []
-
     def leafNode = true
+    def parent = null
 
     def eval(variableMap) {
         if(children.size() > 0) {

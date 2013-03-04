@@ -118,5 +118,30 @@ class VariousNodeTests extends Specification {
         !(constant1.isEqual(constant2))
         constant2.isEqual(constant3)
     }
+    
+    def "testing parent functionality"(){
+        def add = new Add()
+        def constant1 = new NumericConstantNode(72)
+        def constant2 = new NumericConstantNode(6)
+        def node1 = new InternalNode(add, [constant1, constant2])
+        
+        expect:
+        node1.parent == null
+        constant1.parent.isEqual(node1)
+        constant2.parent.isEqual(node1)
+    }
+    
+    def "testing removeChild"(){
+        def add = new Add()
+        def constant1 = new NumericConstantNode(72)
+        def constant2 = new NumericConstantNode(6)
+        def node1 = new InternalNode(add, [constant1, constant2])
+        
+        expect:
+        node1.children.equals([constant1, constant2])
+        node1.removeChild(constant1)
+        node1.removeChild(constant2) == []
+        node1.children.equals([])
+    }
 
 }
