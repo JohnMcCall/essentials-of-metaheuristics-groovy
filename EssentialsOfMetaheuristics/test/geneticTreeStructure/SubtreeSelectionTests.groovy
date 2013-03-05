@@ -29,7 +29,7 @@ class SubtreeSelectionTests extends Specification {
         def innerNode1 = new InternalNode(add, [constant2, constant3])
         def root = new InternalNode(add, [innerNode1, constant1])
         
-        def selector = new SubtreeSelection(root)
+        def selector = new SubtreeSelection()
         
         expect:
         selector.countNodes(root, isLeaf)
@@ -48,7 +48,7 @@ class SubtreeSelectionTests extends Specification {
         def innerNode1 = new InternalNode(add, [constant2, constant3])
         def root = new InternalNode(add, [innerNode1, constant1])
         
-        def selector = new SubtreeSelection(root)
+        def selector = new SubtreeSelection()
         
         expect:
         def pickedNode = selector.pickNodes(root, 2, isLeaf)

@@ -22,7 +22,8 @@ class GeneticTreeTests extends Specification {
 
         def terminalSet = [constant1, constant2, variable1, variable2]
         def gpTree = new GeneticTree()
-        def root = gpTree.doFull(1, 3, functionSet, terminalSet)
+		def args = [1, 3, functionSet, terminalSet]
+        def root = gpTree.doFull(args)
 
         expect:
         root.size() == 7

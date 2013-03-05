@@ -1,7 +1,6 @@
 package geneticTreeStructure
 
 class SubtreeSelection {
-	def root = null
 	// Closure to determine if a node is a leafNode ---- We should write some other "selecting" functions eventually
 	def isLeaf = {x -> x.leafNode}
 	def isNotLeaf = {x -> !x.leafNode}
@@ -11,12 +10,9 @@ class SubtreeSelection {
 	
 	def counter = 0
 	
-	def SubtreeSelection(node) {
-		root = node
-	}
-	
 	// pass it the index of which closure to grab from closureList
-	def doSelection(closureNumber) {
+	def doSelection(root, closureNumber) {
+		counter = 0 
 		def func = closureList[closureNumber]
 		countNodes(root, func)
 		if(counter == 0) {
