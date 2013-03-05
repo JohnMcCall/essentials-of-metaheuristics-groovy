@@ -34,6 +34,7 @@ class AbstractNode {
         }
     }
     
+	// checks if two NODES are equal (not two trees)
     def isEqual(node) {
         def toReturn = true
         

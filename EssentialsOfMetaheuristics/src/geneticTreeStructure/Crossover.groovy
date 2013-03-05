@@ -8,8 +8,8 @@ class Crossover {
     def subtreeCrossover = { tree1, tree2 ->
         def selector1 = new SubtreeSelection(tree1)
         def selector2 = new SubtreeSelection(tree2)
-        def subtree1 = selector1.doSelection()
-        def subtree2 = selector2.doSelection()
+        def subtree1 = selector1.doSelection(2) // used 2 so that we can select any node in the tree
+        def subtree2 = selector2.doSelection(2)
         def parent1 = subtree1.parent
         def parent2 = subtree2.parent
 

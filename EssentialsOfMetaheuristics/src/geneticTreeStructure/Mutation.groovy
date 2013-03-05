@@ -11,7 +11,7 @@ class Mutation {
 
 
     def randomReplacement(tree, depth, max, functionSet, terminalSet){
-        def subtree = selector.doSelection()
+        def subtree = selector.doSelection(1) // used one so that we grab any non-leaf node
         def parent = subtree.parent
 
         if(!parent.equals(null)){
