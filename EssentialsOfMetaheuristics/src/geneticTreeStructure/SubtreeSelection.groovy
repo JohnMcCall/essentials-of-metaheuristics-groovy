@@ -5,7 +5,7 @@ class SubtreeSelection {
 	// Closure to determine if a node is a leafNode ---- We should write some other "selecting" functions eventually
 	def isLeaf = {x -> x.leafNode}
 	def isNotLeaf = {x -> !x.leafNode}
-	def any = {-> true}
+	def any = {x -> true}
 	
 	def closureList = [isLeaf, isNotLeaf, any]
 	
@@ -17,14 +17,15 @@ class SubtreeSelection {
 	
 	// pass it the index of which closure to grab from closureList
 	def doSelection(closureNumber) {
-		countNodes(root, closureList[closureNumber])
+		def func = closureList[closureNumber]
+		countNodes(root, func)
 		if(counter == 0) {
 			return null
 		} else {
 			Random rand = new Random()
 			def randInt = rand.nextInt(counter) + 1
 			counter = 0
-			return pickNodes(root, randInt, isLeaf)
+			return pickNodes(root, randInt, func)
 		}
 	}
 	
