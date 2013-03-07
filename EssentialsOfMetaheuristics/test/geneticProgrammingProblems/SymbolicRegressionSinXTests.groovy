@@ -22,8 +22,9 @@ class SymbolicRegressionSinXTests extends Specification {
 	def "testing quality"() {
 		def problem = new SymbolicRegressionSinX()
 		def geneticTree = new GeneticTree()
-		def functionSet = [new InternalNode(new Add(), []), new InternalNode(new Subtract(), [])]
-		def terminalSet = [new VariableNode("x"), new NumericConstantNode(83), new NumericConstantNode(1990), new NumericConstantNode(12)]
+		def functionSet = [{-> new InternalNode(new Add(), [])}, {-> new InternalNode(new Subtract(), [])}]
+		def terminalSet = [{-> new VariableNode("x")}, {-> new NumericConstantNode(83)}, 
+                                        {-> new NumericConstantNode(1990)}, {-> new NumericConstantNode(12)}]
 		
 		def root = geneticTree.doFull([1, 5, functionSet, terminalSet])
 		def quality = problem.quality(root)

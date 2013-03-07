@@ -25,6 +25,6 @@ class GeneticTree {
 
     def getRandom(list){
         Random rand = new Random()
-        list[rand.nextInt(list.size())].copy()
+        list[rand.nextInt(list.size())]()
     }
 }

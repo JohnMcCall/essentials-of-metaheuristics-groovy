@@ -14,6 +14,7 @@ class SymbolicRegressionSinX {
 	def points = getPoints()
 	
 	def quality = { tree ->
+                println("Tree: " + tree)
 		// Create an array of results of calling Sin(x) on every point
 		def sinArray = []
 		points.each {
@@ -47,7 +48,7 @@ class SymbolicRegressionSinX {
 	def copy = { tree -> tree.clone() }
 	
 	def tweak = { tree, treeBuilder = geneticTree.doFull, args  ->
-		mutator.randomReplacement(tree, treeBuilder(args))
+		mutator.randomReplacement(tree, treeBuilder, args)
 	}
 	
 	def random = { treeBuilder = geneticTree.doFull, args ->
@@ -55,7 +56,7 @@ class SymbolicRegressionSinX {
 	}
 	
 	def terminate = { tree, q = quality(tree) ->
-		evalCount >= maxIterations || q == maximalQuality()
+		evalCount >= maxIterations || q == maximalQuality
 	}
 	
 	String toString() {
