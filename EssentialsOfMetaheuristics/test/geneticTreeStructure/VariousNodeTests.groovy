@@ -70,7 +70,11 @@ class VariousNodeTests extends Specification {
 
         expect:
         node.function == copy.function
-        node.children.equals(copy.children)
+		
+        for(int i = 0; i < node.children.size(); i++) {
+			node.children[i].isEqual(copy.children[i])
+		}
+		
 		copy.addChild(newNode)
 		!(node.children.equals(copy.children))
     }
@@ -123,11 +127,12 @@ class VariousNodeTests extends Specification {
         def add = new Add()
         def constant1 = new NumericConstantNode(72)
         def constant2 = new NumericConstantNode(6)
-        def node1 = new InternalNode(add, [constant1, constant2])
+        def node1 = new InternalNode(add, [constant1])
         
         expect:
         node1.parent == null
         constant1.parent.isEqual(node1)
+		node1.addChild(constant2)
         constant2.parent.isEqual(node1)
     }
     
@@ -136,12 +141,27 @@ class VariousNodeTests extends Specification {
         def constant1 = new NumericConstantNode(72)
         def constant2 = new NumericConstantNode(6)
         def node1 = new InternalNode(add, [constant1, constant2])
-        
-        expect:
+		
+		def newNode1 = node1.removeChild(constant1)
+		//rintln(newNode1)
+		//def newNode2 = newNode1.removeChild(constant2)
+		
+		expect:
         node1.children.equals([constant1, constant2])
-        node1.removeChild(constant1)
-        node1.removeChild(constant2) == []
-        node1.children.equals([])
+        node1.children.equals([constant1])
+		node2.children.equals([])
     }
+	
+	def "testing getRoot"() {
+		def add = new Add()
+		def constant1 = new NumericConstantNode(72)
+		def constant2 = new NumericConstantNode(6)
+		def constant3 = new NumericConstantNode(1)
+		def node1 = new InternalNode(add, [constant1, constant2])
+		def node2 = new InternalNode(add, [node1, constant3])
+		
+		expect:
+		constant2.getRoot().isEqual(node2)
+	}
 
 }

@@ -33,6 +33,22 @@ class AbstractNode {
             return counter
         }
     }
+	
+	def copy() {
+		if(children.size() > 0) {
+			def newChildren = []
+			children.each {
+				newChildren.add(it.copy())
+			}
+			new InternalNode(function, newChildren)
+		} else {
+			if(value instanceof String) {
+				new VariableNode(value)
+			} else {
+				new NumericConstantNode(value)
+			}
+		}
+	}
     
 	// checks if two NODES are equal (not two trees)
     def isEqual(node) {
@@ -53,5 +69,13 @@ class AbstractNode {
         
         return toReturn
     }
+	
+	def getRoot() {
+		if(parent != null) {
+			parent.getRoot()
+		} else {
+			this
+		}
+	}
 
 }
