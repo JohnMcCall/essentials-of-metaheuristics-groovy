@@ -30,10 +30,10 @@ class CrossoverTests extends Specification {
         println(root2)
 
         def crossover = new Crossover()        
-        crossover.subtreeCrossover(root1, root2)
+        def results = crossover.subtreeCrossover(root1, root2)
         
         expect:
-        println(root1)
-        println(root2)
+        println(results[0])
+        println(results[1])
     }
 }

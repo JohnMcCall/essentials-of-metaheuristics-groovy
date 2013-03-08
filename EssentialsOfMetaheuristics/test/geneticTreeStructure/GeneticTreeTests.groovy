@@ -26,7 +26,6 @@ class GeneticTreeTests extends Specification {
         def root = gpTree.doFull(args)
 
         expect:
-        println(root)
         root.size() == 7
     }
 

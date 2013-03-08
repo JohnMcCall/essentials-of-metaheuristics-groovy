@@ -44,8 +44,8 @@ class TreeGeneticAlgorithm {
                 def parentA = selector.select(problem, startingPopulation as List)
                 def parentB = selector.select(problem, startingPopulation as List)
                 def children = crossover(parentA, parentB)
-                endingPopulation.add(problem.tweak(parentA, doFull, [1, 3, args[2], args[3]]))
-                endingPopulation.add(problem.tweak(parentB, doFull, [1, 3, args[2], args[3]]))
+                endingPopulation.add(problem.tweak(children[0], doFull, [1, 3, args[2], args[3]]))
+                endingPopulation.add(problem.tweak(children[1], doFull, [1, 3, args[2], args[3]]))
             }
             startingPopulation = endingPopulation
         }
