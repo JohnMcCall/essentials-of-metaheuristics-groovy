@@ -26,8 +26,12 @@ class SubtreeSelectionTests extends Specification {
         def constant3 = new NumericConstantNode(234)
         
         def add = new Add()
-        def innerNode1 = new InternalNode(add, [constant2, constant3])
-        def root = new InternalNode(add, [innerNode1, constant1])
+        def innerNode1 = new InternalNode(add)
+        innerNode1 = innerNode1.addChild(constant2)
+        innerNode1 = innerNode1.addChild(constant3)
+        def root = new InternalNode(add)
+        root = root.addChild(innerNode1)
+        root = root.addChild(constant1)
         
         def selector = new SubtreeSelection()
         
@@ -45,8 +49,12 @@ class SubtreeSelectionTests extends Specification {
         def constant3 = new NumericConstantNode(234)
         
         def add = new Add()
-        def innerNode1 = new InternalNode(add, [constant2, constant3])
-        def root = new InternalNode(add, [innerNode1, constant1])
+        def innerNode1 = new InternalNode(add)
+        innerNode1 = innerNode1.addChild(constant2)
+        innerNode1 = innerNode1.addChild(constant3)
+        def root = new InternalNode(add)
+        root = root.addChild(innerNode1)
+        root = root.addChild(constant1)
         
         def selector = new SubtreeSelection()
         

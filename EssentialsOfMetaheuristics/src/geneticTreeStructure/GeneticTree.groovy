@@ -17,7 +17,7 @@ class GeneticTree {
 			def newArgs = args.clone()
 			newArgs[0]++
             arity.times{
-                node.addChild(doFull(newArgs))
+                node = node.addChild(doFull(newArgs))
             }
             return node
         }

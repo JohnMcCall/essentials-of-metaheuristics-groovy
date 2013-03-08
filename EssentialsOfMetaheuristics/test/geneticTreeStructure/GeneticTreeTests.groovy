@@ -7,8 +7,8 @@ class GeneticTreeTests extends Specification {
     def "test doFull"(){
         def add = new Add()
         def subtract = new Subtract()
-        def innerNode1 = {-> new InternalNode(add, []) }
-        def innerNode2 = {-> new InternalNode(subtract, []) }
+        def innerNode1 = {-> new InternalNode(add) }
+        def innerNode2 = {-> new InternalNode(subtract) }
         def functionSet = [innerNode1, innerNode2]
 
         def constant1 = {-> new NumericConstantNode(72) }
@@ -26,6 +26,7 @@ class GeneticTreeTests extends Specification {
         def root = gpTree.doFull(args)
 
         expect:
+        println(root)
         root.size() == 7
     }
 

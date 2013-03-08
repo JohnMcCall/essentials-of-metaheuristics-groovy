@@ -63,8 +63,15 @@ class AbstractNode {
         if(this.value != node.value) {
             toReturn = false
         }
-        if(!this.children.equals(node.children)) {
+        
+        if(this.children.size() != node.children.size()) {
             toReturn = false
+        } else {
+            this.children.eachWithIndex { it, i ->
+                if(!it.isEqual(node.children[i])) {
+                    toReturn = false
+                }
+            }
         }
         if(!leafNode && !node.leafNode && !this.function.isEqual(node.function)) {
             toReturn = false

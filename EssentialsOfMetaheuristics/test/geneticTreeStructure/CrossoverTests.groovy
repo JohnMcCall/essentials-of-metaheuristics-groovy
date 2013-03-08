@@ -7,8 +7,8 @@ class CrossoverTests extends Specification {
     def "testing subtree crossover"(){
         def add = new Add()
         def subtract = new Subtract()
-        def innerNode1 = {-> new InternalNode(add, []) }
-        def innerNode2 = {-> new InternalNode(subtract, []) }
+        def innerNode1 = {-> new InternalNode(add) }
+        def innerNode2 = {-> new InternalNode(subtract) }
         def functionSet = [innerNode1, innerNode2]
 
         def constant1 = {-> new NumericConstantNode(72) }
