@@ -35,12 +35,18 @@ class AbstractNode {
     }
 	
 	def copy() {
-		if(children.size() > 0) {
+		if(this instanceof InternalNode) {
 			def newChildren = []
 			children.each {
 				newChildren.add(it.copy())
 			}
-			new InternalNode(function, newChildren)
+			def newNode = new InternalNode(function)
+			
+			newChildren.each {
+				newNode = newNode.addChild(it)
+			}
+			
+			return newNode
 		} else {
 			if(value instanceof String) {
 				new VariableNode(value)

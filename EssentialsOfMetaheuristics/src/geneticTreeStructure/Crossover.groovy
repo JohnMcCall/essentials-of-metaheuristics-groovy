@@ -9,6 +9,7 @@ class Crossover {
         def parent1 = subtree1.parent
         def parent2 = subtree2.parent
 
+		//TODO: set parent1 and parent2 equal to the result of the swaps
         swap(parent1, subtree1, subtree2, tree2)
         swap(parent2, subtree2, subtree1, tree1)
 

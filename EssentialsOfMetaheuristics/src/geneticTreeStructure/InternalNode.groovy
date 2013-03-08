@@ -2,9 +2,8 @@ package geneticTreeStructure
 
 class InternalNode extends AbstractNode {
 
-    def InternalNode(function, listOfChildren){
+    def InternalNode(function){
         this.function = function
-        listOfChildren.each{ addChild(it) }
         leafNode = false
     }
 
@@ -14,8 +13,14 @@ class InternalNode extends AbstractNode {
     }
 
     def addChild(node){
-        children.add(node)
-        node.parent = this
+		def newTree = this.getRoot().copy()
+		def foundNode = newTree.get(newTree, this)
+		
+        foundNode.children.add(node)
+		foundNode.children.each {
+			it.parent = foundNode
+		}
+		return newTree
     }
     
     def removeChild(nodeToRemove){
