@@ -143,13 +143,15 @@ class VariousNodeTests extends Specification {
         def node1 = new InternalNode(add, [constant1, constant2])
 		
 		def newNode1 = node1.removeChild(constant1)
-		//rintln(newNode1)
-		//def newNode2 = newNode1.removeChild(constant2)
+		
+		def newNode2 = newNode1.removeChild(constant2)
+		println(newNode1)
+		println(newNode2)
 		
 		expect:
         node1.children.equals([constant1, constant2])
-        node1.children.equals([constant1])
-		node2.children.equals([])
+        newNode1.children[0].isEqual(constant2)
+		newNode2.children.equals([])
     }
 	
 	def "testing getRoot"() {
@@ -162,6 +164,21 @@ class VariousNodeTests extends Specification {
 		
 		expect:
 		constant2.getRoot().isEqual(node2)
+	}
+	
+	def "testing toGet"() {
+		def add = new Add()
+		def constant1 = new NumericConstantNode(72)
+		def constant2 = new NumericConstantNode(6)
+		def constant3 = new NumericConstantNode(1)
+		def node1 = new InternalNode(add, [constant1, constant2])
+		def node2 = new InternalNode(add, [node1, constant3])
+		
+		def toFind = new NumericConstantNode(6)
+		def found = node2.get(node2, toFind)
+		
+		expect:
+		found.isEqual(constant2)
 	}
 
 }

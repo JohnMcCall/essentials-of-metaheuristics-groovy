@@ -60,7 +60,7 @@ class AbstractNode {
         if(!this.children.equals(node.children)) {
             toReturn = false
         }
-        if(!leafNode && !this.function.isEqual(node.function)) {
+        if(!leafNode && !node.leafNode && !this.function.isEqual(node.function)) {
             toReturn = false
         }
         if(this.leafNode != node.leafNode) {
@@ -76,6 +76,23 @@ class AbstractNode {
 		} else {
 			this
 		}
+	}
+
+	def getValue = null
+	
+	def get(root, toGet) {
+		if(root.isEqual(toGet)) {
+			getValue = root
+		} else {
+			root.children.each {
+				if(it.isEqual(toGet)) {
+					getValue = it
+				} else {
+					get(it, toGet)
+				}
+			}
+		}
+		return getValue
 	}
 
 }

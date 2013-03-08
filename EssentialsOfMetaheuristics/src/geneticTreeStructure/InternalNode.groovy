@@ -19,34 +19,22 @@ class InternalNode extends AbstractNode {
     }
     
     def removeChild(nodeToRemove){
-		def newNode = nodeToRemove.getRoot().copy()
-		Boolean removed = false
-		newNode.children.each {
-			removed = removeHelper(it, nodeToRemove)
-			if(removed) {
-				println("NewNode: " + newNode)
-				return newNode
-			}
-		}
+		def newTree = this.getRoot().copy()
+		remove(newTree, nodeToRemove)		
+		return newTree
     }
 	
-	private removeHelper(node, nodeToRemove) {
-		println("node: " + node + " toRemove: " + nodeToRemove)
-		if(node.isEqual(nodeToRemove)) {
-			println("Removing Node!")
-			println(node.parent.children)
-			node.parent.children = node.parent.children.minus(nodeToRemove)
-			println("AHHAHA" + node.parent.children.minus(nodeToRemove))
-			println(node.parent.children)
-			return true
-		} else if(node.children.size() > 0) {
-			node.children.each {
-				return removeHelper(it, nodeToRemove)
-			} 
-		} else {
-			return false
+	private remove(tree, nodeToRemove) {
+		def foundNode = tree.get(tree, nodeToRemove)
+		def index = -1
+		foundNode.parent.children.eachWithIndex { it, i ->
+			if(it.isEqual(nodeToRemove)) {
+				index = i
+			}
 		}
+		foundNode.parent.children.remove(index)
 	}
+
 
     String toString() {
         "function: " + function.toString() + " children: " + childrenToString()
