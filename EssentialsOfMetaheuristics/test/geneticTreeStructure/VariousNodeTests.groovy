@@ -193,7 +193,7 @@ class VariousNodeTests extends Specification {
 		node2.children[0].children[1].getRoot().isEqual(node2)
 	}
 	
-	def "testing toGet"() {
+	def "testing get"() {
 		def add = new Add()
 		def constant1 = new NumericConstantNode(72)
 		def constant2 = new NumericConstantNode(6)
@@ -212,5 +212,45 @@ class VariousNodeTests extends Specification {
 		expect:
 		found.isEqual(constant2)
 	}
+	
+	def "testing get with an index"() {
+		def add = new Add()
+		def constant1 = new NumericConstantNode(72)
+		def constant2 = new NumericConstantNode(6)
+		def constant3 = new NumericConstantNode(1)
+		def node1 = new InternalNode(add)
+		node1 = node1.addChild(constant1)
+		node1 = node1.addChild(constant2)
+		
+		def node2 = new InternalNode(add)
+		node2 = node2.addChild(node1)
+		node2 = node2.addChild(constant3)
+		
+		def found = node2.get(node2, 3, 0)
+		
+		expect:
+		found.isEqual(constant2)
+	}
+	
+	def "testing getIndex"() {
+		def add = new Add()
+		def constant1 = new NumericConstantNode(72)
+		def constant2 = new NumericConstantNode(6)
+		def constant3 = new NumericConstantNode(1)
+		def node1 = new InternalNode(add)
+		node1 = node1.addChild(constant1)
+		node1 = node1.addChild(constant2)
+		
+		def node2 = new InternalNode(add)
+		node2 = node2.addChild(node1)
+		node2 = node2.addChild(constant3)
+		
+		def index = node2.getIndex(constant2)
+		
+		expect:
+		index == 3
+	}
+	
+	
 
 }

@@ -9,6 +9,7 @@ class AbstractNode {
     def children = []
     def leafNode = true
     def parent = null
+	def index = -1
 
     def eval(variableMap) {
         if(children.size() > 0) {
@@ -107,5 +108,48 @@ class AbstractNode {
 		}
 		return getValue
 	}
+	
+	def getCounter = 0
+	def get(root, givenIndex, count) {
+		getCounter = 0
+		getValue = null
+		doGet(root, givenIndex, count)
+		return getValue
+	}
+
+	def doGet(root,givenIndex, count) {
+		getCounter = count
+		//println("ROOT: " + root + " and count = " + count)
+		if(getCounter == givenIndex) {
+			//println("Matched index at ${count}")
+			getValue = root
+		} else {
+			root.children.each {
+				getCounter = doGet(it, givenIndex, getCounter + 1)
+
+			}
+		}
+		return getCounter
+	}
+	
+	def counter = 0
+	def updateIndices(root, count) {
+		counter = count
+		root.index = counter
+
+		root.children.each {
+			counter = updateIndices(it, counter + 1)
+				
+		}
+		return counter
+	}
+	
+	def getIndex(node) {
+		counter = 0
+		updateIndices(node.getRoot(), 0)
+		node.index
+	}
+	
+	
 
 }

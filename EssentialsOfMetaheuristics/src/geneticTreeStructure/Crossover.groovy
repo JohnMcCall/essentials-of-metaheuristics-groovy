@@ -13,7 +13,6 @@ class Crossover {
         def parent1 = subtree1.parent
         def parent2 = subtree2.parent
 
-		//TODO: set parent1 and parent2 equal to the result of the swaps
         tree1copy = swap(parent1, subtree1, subtree2, tree2copy)
         tree2copy = swap(parent2, subtree2, subtree1, tree1copy)
         
@@ -22,9 +21,15 @@ class Crossover {
     }
 
     private swap(parent, subtree1, subtree2, tree) {
+		println("Parent " + parent)
         if(parent != null){
+			def index = tree.getIndex(parent)
+			println("Index: " + index)
             tree = parent.removeChild(subtree1)
-            tree = tree.addChild(subtree2)
+			println("Tree after remove: " + tree)
+			def addTo = tree.get(tree, index, 0)
+			println("Add To " + addTo)
+            tree = addTo.addChild(subtree2)
         } else {
             tree = subtree2
         }
