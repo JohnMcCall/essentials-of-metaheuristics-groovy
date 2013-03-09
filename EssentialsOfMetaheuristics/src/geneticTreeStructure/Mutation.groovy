@@ -1,6 +1,7 @@
 package geneticTreeStructure
 
 class Mutation {
+    def sizeLimit = -1
     def selector = new SubtreeSelection()
 
     def randomReplacement(root, treeBuilder, args){
@@ -11,7 +12,11 @@ class Mutation {
         if(!parent.equals(null)){
             rootCopy = parent.removeChild(subtree)
             rootCopy = rootCopy.addChild(treeBuilder(args))
-            return rootCopy
+            if(rootCopy.size() > sizeLimit){
+                return root
+            } else {
+                return rootCopy
+            }
         } else {
             treeBuilder(args)
         }

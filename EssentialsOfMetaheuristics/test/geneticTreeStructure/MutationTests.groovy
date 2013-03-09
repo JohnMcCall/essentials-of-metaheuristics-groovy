@@ -22,12 +22,12 @@ class MutationTests extends Specification {
 
         def terminalSet = [constant1, constant2, variable1, variable2]
         def gpTree = new GeneticTree()
-	def args = [1, 3, functionSet, terminalSet]
+	def args = [1, 4, functionSet, terminalSet]
         def root = gpTree.doFull(args)
         
         println(root)
         
-        def mutation = new Mutation()
+        def mutation = new Mutation([sizeLimit : 40])
         def newRoot = mutation.randomReplacement(root, gpTree.doFull, args)
         
         expect:

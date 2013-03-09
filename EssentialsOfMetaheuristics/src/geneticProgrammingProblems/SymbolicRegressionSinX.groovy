@@ -8,7 +8,7 @@ class SymbolicRegressionSinX {
 	Integer maxIterations = 1000
 	def numPoints = 10.0
 	def maximalQuality = 0 // the lower the quality the better for this problem
-	def mutator = new Mutation()
+	def mutator = new Mutation([sizeLimit : 50])
 	def geneticTree = new GeneticTree()
 	
 	def points = getPoints()

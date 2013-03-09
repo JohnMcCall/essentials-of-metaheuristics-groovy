@@ -23,8 +23,6 @@ class InternalNode extends AbstractNode {
     }
     
     def removeChild(nodeToRemove){
-		println("THIS: " + this)
-		println("NODE TO REMOVE: " + nodeToRemove)
 		def newTree = this.getRoot().copy()
 		remove(newTree, nodeToRemove, newTree.getIndex(this))		
 		return newTree
@@ -32,10 +30,8 @@ class InternalNode extends AbstractNode {
 	
 	private remove(tree, nodeToRemove, index) {
 		def foundNode = tree.get(tree, index, 0)
-		println("FoundNode: " + foundNode)
 		def listIndex = -1
 		foundNode.children.eachWithIndex { it, i ->
-			println("IT:" + it)
 			if(it.isEqual(nodeToRemove)) {
 				listIndex = i
 			}

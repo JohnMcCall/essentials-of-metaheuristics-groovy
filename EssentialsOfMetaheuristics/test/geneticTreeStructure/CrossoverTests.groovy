@@ -22,14 +22,14 @@ class CrossoverTests extends Specification {
 
         def terminalSet = [constant1, constant2, variable1, variable2]
         def gpTree = new GeneticTree()
-		def args = [1, 3, functionSet, terminalSet]
+	def args = [1, 3, functionSet, terminalSet]
         def root1 = gpTree.doFull(args)
         def root2 = gpTree.doFull(args)
         
         println(root1)
         println(root2)
 
-        def crossover = new Crossover()        
+        def crossover = new Crossover([sizeLimit : 40])        
         def results = crossover.subtreeCrossover(root1, root2)
         
         expect:

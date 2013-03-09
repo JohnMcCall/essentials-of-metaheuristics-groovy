@@ -14,9 +14,9 @@ class TreeExperimentRunner {
     static runExperiment(searchers, problems, numRuns = 1) {
         def popsize = 1
         def selector = new TournamentSelection()
-        def crossover = new Crossover()
+        def crossover = new Crossover([sizeLimit : 50])
         
-        def maxDepth = 5
+        def maxDepth = 3
         
         def add = new Add()
         def subtract = new Subtract()
@@ -24,8 +24,8 @@ class TreeExperimentRunner {
         def divide = new Divide()
         def rand = new Random()
         
-        def functionSet = [{-> new InternalNode(add, [])}, {-> new InternalNode(subtract, [])}, 
-                            {-> new InternalNode(multiply, [])}, {-> new InternalNode(divide, [])}]
+        def functionSet = [{-> new InternalNode(add)}, {-> new InternalNode(subtract)}, 
+                            {-> new InternalNode(multiply)}, {-> new InternalNode(divide)}]
         
         def terminalSet = [{-> new VariableNode("x")}, {-> new NumericConstantNode(rand.nextInt(50))}, 
                             {-> new NumericConstantNode(0)}, {-> new NumericConstantNode(1)}] 

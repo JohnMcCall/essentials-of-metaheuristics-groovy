@@ -13,6 +13,7 @@ class AbstractNode {
 
     def eval(variableMap) {
         if(children.size() > 0) {
+            println("CHILDREN[1] " + children[1])
             function.doMath(children[0].eval(variableMap),
                     children[1].eval(variableMap))
         } else {
@@ -119,9 +120,7 @@ class AbstractNode {
 
 	def doGet(root,givenIndex, count) {
 		getCounter = count
-		//println("ROOT: " + root + " and count = " + count)
 		if(getCounter == givenIndex) {
-			//println("Matched index at ${count}")
 			getValue = root
 		} else {
 			root.children.each {
