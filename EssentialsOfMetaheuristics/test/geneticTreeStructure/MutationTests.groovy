@@ -27,7 +27,7 @@ class MutationTests extends Specification {
         
         println(root)
         
-        def mutation = new Mutation([sizeLimit : 40])
+        def mutation = new Mutation()
         def newRoot = mutation.randomReplacement(root, gpTree.doFull, args)
         
         expect:

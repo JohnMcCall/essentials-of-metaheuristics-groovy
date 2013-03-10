@@ -12,6 +12,7 @@ class TreeGeneticAlgorithm {
     def popsize = 100
     def geneticTree = new GeneticTree()
     def doFull = geneticTree.doFull
+	def sizeLimit = -1
 
     // Our Algorithm takes a Genetic Algorithm Problem, a desired population size
     def minimize(problem, populationSize=popsize, selector=new TournamentSelection(), crossover=new Crossovers().onePointCrossover, args) {
@@ -21,17 +22,15 @@ class TreeGeneticAlgorithm {
 
         popsize.times {
             def toAdd = problem.random(doFull, args)
-            startingPopulation.add(toAdd) // Add a new random individual
+            startingPopulation.add(new TreeGenomeFitnessPair(toAdd, problem.quality(toAdd), toAdd.size(), sizeLimit)) // Add a new random individual
         }
 
-        def best = problem.create(doFull, args)
-        def qualityOfBest = problem.quality(best)
-        while(!problem.terminate(best, qualityOfBest)) {
+		def bestTree = problem.create(doFull, args)
+        def best = new TreeGenomeFitnessPair(bestTree, problem.quality(bestTree), bestTree.size(), sizeLimit)
+        while(!problem.terminate(best.genome, best.fitness)) {
             for(def individual: startingPopulation) {
-                def newQuality = problem.quality(individual)
-                if(newQuality < qualityOfBest) {
-                    best = individual
-                    qualityOfBest = newQuality
+                if(best.compareTo(individual) > 0) {
+					best = individual
                 }
 
             }
@@ -42,8 +41,12 @@ class TreeGeneticAlgorithm {
                 def parentA = selector.select(problem, startingPopulation as List)
                 def parentB = selector.select(problem, startingPopulation as List)
                 def children = crossover(parentA, parentB)
-                endingPopulation.add(problem.tweak(children[0], doFull, [1, 3, args[2], args[3]]))
-                endingPopulation.add(problem.tweak(children[1], doFull, [1, 3, args[2], args[3]]))
+				
+				def childA = problem.tweak(children[0], doFull, [1, 3, args[2], args[3]])
+				def childB = problem.tweak(children[1], doFull, [1, 3, args[2], args[3]])
+				
+                endingPopulation.add(new TreeGenomeFitnessPair(childA, problem.quality(childA), childA.size(), sizeLimit))
+                endingPopulation.add(new TreeGenomeFitnessPair(childB, problem.quality(childB), childB.size(), sizeLimit))
             }
             startingPopulation = endingPopulation
         }

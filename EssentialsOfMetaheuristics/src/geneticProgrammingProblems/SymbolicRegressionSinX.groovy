@@ -8,13 +8,15 @@ class SymbolicRegressionSinX {
 	Integer maxIterations = 1000
 	def numPoints = 10.0
 	def maximalQuality = 0 // the lower the quality the better for this problem
-	def mutator = new Mutation([sizeLimit : 50])
+	def mutator = new Mutation()
 	def geneticTree = new GeneticTree()
 	
 	def points = getPoints()
 	
 	def quality = { tree ->
 		evalCount++
+		println("Evalcount: " + evalCount)
+		
 		// Create an array of results of calling Sin(x) on every point
 		def sinArray = []
 		points.each {
@@ -38,7 +40,7 @@ class SymbolicRegressionSinX {
 		absArray.each {
 			result += it
 		}
-		result/numPoints
+		return result/numPoints
 	}
 	
 	def create = { treeBuilder = geneticTree.doFull, args ->

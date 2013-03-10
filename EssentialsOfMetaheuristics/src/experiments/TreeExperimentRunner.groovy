@@ -14,7 +14,7 @@ class TreeExperimentRunner {
     static runExperiment(searchers, problems, numRuns = 1) {
         def popsize = 1
         def selector = new TournamentSelection()
-        def crossover = new Crossover([sizeLimit : 50])
+        def crossover = new Crossover()
         
         def maxDepth = 3
         
@@ -46,10 +46,10 @@ class TreeExperimentRunner {
 
     static main(args) {
         def searchers = [
-            new TreeGeneticAlgorithm()
+            new TreeGeneticAlgorithm(sizeLimit : 50)
         ]
         def problems = [
-            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 1000)
+            new SymbolicRegressionSinX(sizeLimit : 50, numPoints : 20, maxIterations : 1000)
         ]
         // It would be nice to collect the total time here and include it in the
         // output.

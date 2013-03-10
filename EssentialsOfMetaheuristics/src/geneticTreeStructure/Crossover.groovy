@@ -1,7 +1,6 @@
 package geneticTreeStructure
 
 class Crossover {
-    def sizeLimit = -1
     
     def subtreeCrossover = { tree1, tree2 ->
         def tree1copy = tree1.copy()
@@ -16,12 +15,8 @@ class Crossover {
 
         tree1copy = swap(parent1, subtree1, subtree2, tree1copy)
         tree2copy = swap(parent2, subtree2, subtree1, tree2copy)
-        
-        if(tree1copy.size() > sizeLimit || tree2copy.size() > sizeLimit){
-            return [tree1, tree2]
-        } else {
-            [tree1copy, tree2copy]
-        }
+      
+		return [tree1copy, tree2copy]
     }
 
     private swap(parent, subtree1, subtree2, tree) {

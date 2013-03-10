@@ -29,7 +29,7 @@ class CrossoverTests extends Specification {
         println(root1)
         println(root2)
 
-        def crossover = new Crossover([sizeLimit : 40])        
+        def crossover = new Crossover()        
         def results = crossover.subtreeCrossover(root1, root2)
         
         expect:
