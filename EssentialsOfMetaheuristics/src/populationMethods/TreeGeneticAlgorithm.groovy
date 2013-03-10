@@ -12,7 +12,7 @@ class TreeGeneticAlgorithm {
     def popsize = 100
     def geneticTree = new GeneticTree()
     def doFull = geneticTree.doFull
-	def sizeLimit = -1
+    def sizeLimit = -1
 
     // Our Algorithm takes a Genetic Algorithm Problem, a desired population size
     def minimize(problem, populationSize=popsize, selector=new TournamentSelection(), crossover=new Crossovers().onePointCrossover, args) {
@@ -25,12 +25,12 @@ class TreeGeneticAlgorithm {
             startingPopulation.add(new TreeGenomeFitnessPair(toAdd, problem.quality(toAdd), toAdd.size(), sizeLimit)) // Add a new random individual
         }
 
-		def bestTree = problem.create(doFull, args)
+        def bestTree = problem.create(doFull, args)
         def best = new TreeGenomeFitnessPair(bestTree, problem.quality(bestTree), bestTree.size(), sizeLimit)
         while(!problem.terminate(best.genome, best.fitness)) {
             for(def individual: startingPopulation) {
                 if(best.compareTo(individual) > 0) {
-					best = individual
+                    best = individual
                 }
 
             }
@@ -40,11 +40,11 @@ class TreeGeneticAlgorithm {
             for(i in 0..(popsize/2)) {
                 def parentA = selector.select(problem, startingPopulation as List)
                 def parentB = selector.select(problem, startingPopulation as List)
-                def children = crossover(parentA, parentB)
-				
-				def childA = problem.tweak(children[0], doFull, [1, 3, args[2], args[3]])
-				def childB = problem.tweak(children[1], doFull, [1, 3, args[2], args[3]])
-				
+                def children = crossover(parentA.genome, parentB.genome)
+
+                def childA = problem.tweak(children[0], doFull, [1, 3, args[2], args[3]])
+                def childB = problem.tweak(children[1], doFull, [1, 3, args[2], args[3]])
+
                 endingPopulation.add(new TreeGenomeFitnessPair(childA, problem.quality(childA), childA.size(), sizeLimit))
                 endingPopulation.add(new TreeGenomeFitnessPair(childB, problem.quality(childB), childB.size(), sizeLimit))
             }

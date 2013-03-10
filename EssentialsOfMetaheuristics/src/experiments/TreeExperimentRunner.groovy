@@ -49,7 +49,7 @@ class TreeExperimentRunner {
             new TreeGeneticAlgorithm(sizeLimit : 50)
         ]
         def problems = [
-            new SymbolicRegressionSinX(sizeLimit : 50, numPoints : 20, maxIterations : 1000)
+            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 1000)
         ]
         // It would be nice to collect the total time here and include it in the
         // output.
