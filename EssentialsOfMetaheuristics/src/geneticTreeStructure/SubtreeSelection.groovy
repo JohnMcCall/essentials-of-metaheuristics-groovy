@@ -1,49 +1,57 @@
 package geneticTreeStructure
 
 class SubtreeSelection {
-	// Closure to determine if a node is a leafNode ---- We should write some other "selecting" functions eventually
 	def isLeaf = {x -> x.leafNode}
 	def isNotLeaf = {x -> !x.leafNode}
 	def any = {x -> true}
 	
 	def closureList = [isLeaf, isNotLeaf, any]
 	
-	def counter = 0
-	
 	// pass it the index of which closure to grab from closureList
 	def doSelection(root, closureNumber) {
-		counter = 0 
 		def func = closureList[closureNumber]
-		countNodes(root, func)
-		if(counter == 0) {
+		def count = countNodes(root, func, 0)
+		if(count == 0) {
 			return null
 		} else {
 			Random rand = new Random()
-			def randInt = rand.nextInt(counter) + 1
-			counter = 0
+			def randInt = rand.nextInt(count) + 1
 			return pickNodes(root, randInt, func)
 		}
 	}
 	
-	def countNodes(node, func) {
+	def countNodes(node, func, count) {
 		if(func(node)) {
-			counter++
+			count++
 		}
 		node.children.each {
-			countNodes(it, func)
+			count = countNodes(it, func, count)
 		}
+		
+		return count
 	}
 	
+	def counter = 0
+	def pickedNode = null
+	
 	def pickNodes(node, randInt, func) {
+		counter = 0
+		pickedNode = null
+		pickNodesHelper(node, randInt, func)
+		return pickedNode
+	}
+	
+	def pickNodesHelper(node, randInt, func) {
+		def count = counter
 		if(func(node)) {
 			counter++
-			if(counter >= randInt) {
-				return node
+			if(counter == randInt) {
+				pickedNode = node
 			}
 		}
 		
 		for(def child: node.children){
-			def tempNode = pickNodes(child, randInt, func)
+			def tempNode = pickNodesHelper(child, randInt, func)
 			if(tempNode != null) {
 				return tempNode
 			}

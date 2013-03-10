@@ -14,7 +14,7 @@ class SymbolicRegressionSinX {
 	def points = getPoints()
 	
 	def quality = { tree ->
-                println("Tree: " + tree)
+		evalCount++
 		// Create an array of results of calling Sin(x) on every point
 		def sinArray = []
 		points.each {

@@ -14,8 +14,8 @@ class Crossover {
         def parent1 = subtree1.parent
         def parent2 = subtree2.parent
 
-        tree1copy = swap(parent1, subtree1, subtree2, tree2copy)
-        tree2copy = swap(parent2, subtree2, subtree1, tree1copy)
+        tree1copy = swap(parent1, subtree1, subtree2, tree1copy)
+        tree2copy = swap(parent2, subtree2, subtree1, tree2copy)
         
         if(tree1copy.size() > sizeLimit || tree2copy.size() > sizeLimit){
             return [tree1, tree2]

@@ -27,9 +27,7 @@ class TreeGeneticAlgorithm {
         def best = problem.create(doFull, args)
         def qualityOfBest = problem.quality(best)
         while(!problem.terminate(best, qualityOfBest)) {
-            println("Best:" + best)
             for(def individual: startingPopulation) {
-                println(startingPopulation.size())
                 def newQuality = problem.quality(individual)
                 if(newQuality < qualityOfBest) {
                     best = individual

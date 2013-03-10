@@ -31,7 +31,8 @@ class TreeExperimentRunner {
                             {-> new NumericConstantNode(0)}, {-> new NumericConstantNode(1)}] 
         
         def args = [1, maxDepth, functionSet, terminalSet]
-        
+		
+        println("Beginning Experiment!")
         for (p in problems) {
             for (s in searchers) {
                 for (i in 0..<numRuns) {
@@ -48,7 +49,7 @@ class TreeExperimentRunner {
             new TreeGeneticAlgorithm()
         ]
         def problems = [
-            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 10)
+            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 1000)
         ]
         // It would be nice to collect the total time here and include it in the
         // output.
