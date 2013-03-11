@@ -69,8 +69,8 @@ class TreeGeneticAlgorithm {
                 endingPopulation.add(new TreeGenomeFitnessPair(childB, problem.quality(childB), childB.size(), sizeLimit))
             }
             startingPopulation = endingPopulation
-            println best
-            println getAverageSize(startingPopulation)
+            //println best
+            //println getAverageSize(startingPopulation)
         }
         return best
     }

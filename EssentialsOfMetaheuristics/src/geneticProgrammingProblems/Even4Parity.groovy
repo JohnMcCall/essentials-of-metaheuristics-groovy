@@ -13,30 +13,40 @@ class Even4Parity {
     def quality = { tree ->
         def fitness = 16
         evalCount++
-        println("Evalcount: " + evalCount)
-        def tests = [ [d0 : true, d1 : true, d2 : true, d3 : true],
-                      [d0 : true, d1 : true, d2 : true, d3 : false],
-                      [d0 : true, d1 : true, d2 : false, d3 : true],
-                      [d0 : true, d1 : true, d2 : false, d3 : false],
-                      [d0 : true, d1 : false, d2 : true, d3 : true],
-                      [d0 : true, d1 : false, d2 : true, d3 : false],
-                      [d0 : true, d1 : false, d2 : false, d3 : true],
-                      [d0 : true, d1 : false, d2 : false, d3 : false],
-                      [d0 : false, d1 : true, d2 : true, d3 : true],
-                      [d0 : false, d1 : true, d2 : true, d3 : false],
-                      [d0 : false, d1 : true, d2 : false, d3 : true],
-                      [d0 : false, d1 : true, d2 : false, d3 : false],
-                      [d0 : false, d1 : false, d2 : true, d3 : true],
-                      [d0 : false, d1 : false, d2 : true, d3 : false],
-                      [d0 : false, d1 : false, d2 : false, d3 : true],
-                      [d0 : false, d1 : false, d2 : false, d3 : false]]
+        //println("Evalcount: " + evalCount)
+        def tests = [ ["d0" : true, "d1" : true, "d2" : true, "d3" : true],
+                      ["d0" : true, "d1" : true, "d2" : true, "d3" : false],
+                      ["d0" : true, "d1" : true, "d2" : false, "d3" : true],
+                      ["d0" : true, "d1" : true, "d2" : false, "d3" : false],
+                      ["d0" : true, "d1" : false, "d2" : true, "d3" : true],
+                      ["d0" : true, "d1" : false, "d2" : true, "d3" : false],
+                      ["d0" : true, "d1" : false, "d2" : false, "d3" : true],
+                      ["d0" : true, "d1" : false, "d2" : false, "d3" : false],
+                      ["d0" : false, "d1" : true, "d2" : true, "d3" : true],
+                      ["d0" : false, "d1" : true, "d2" : true, "d3" : false],
+                      ["d0" : false, "d1" : true, "d2" : false, "d3" : true],
+                      ["d0" : false, "d1" : true, "d2" : false, "d3" : false],
+                      ["d0" : false, "d1" : false, "d2" : true, "d3" : true],
+                      ["d0" : false, "d1" : false, "d2" : true, "d3" : false],
+                      ["d0" : false, "d1" : false, "d2" : false, "d3" : true],
+                      ["d0" : false, "d1" : false, "d2" : false, "d3" : false]]
+        
         tests.each {
             def result = tree.eval(it)
-            if(result){
+            if(result == evenParity(it)){
                 fitness--
             }
         }
         return fitness
+    }
+    
+    def evenParity = { map ->
+        def numTrues = map.findAll{it.value == true}.size()
+        if(numTrues % 2 == 0){
+            true
+        } else {
+            false
+        }
     }
 
     def create = { treeBuilder = geneticTree.doFull, args ->
@@ -58,6 +68,6 @@ class Even4Parity {
     }
 
     String toString() {
-        this.class.name.split("\\.")[-1] + "_" + numPoints + "_" + maxIterations
+        this.class.name.split("\\.")[-1] + "_" + maxIterations
     }
 }
