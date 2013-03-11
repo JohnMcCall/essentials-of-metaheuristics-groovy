@@ -29,7 +29,7 @@ class TreeGeneticAlgorithm {
         def best = new TreeGenomeFitnessPair(bestTree, problem.quality(bestTree), bestTree.size(), sizeLimit)
         while(!problem.terminate(best.genome, best.fitness)) {
             for(def individual: startingPopulation) {
-                if(best.compareTo(individual) > 0) {
+                if(best.compareTo(individual) < 0) {
                     best = individual
                 }
 
@@ -44,13 +44,43 @@ class TreeGeneticAlgorithm {
 
                 def childA = problem.tweak(children[0], doFull, [1, 3, args[2], args[3]])
                 def childB = problem.tweak(children[1], doFull, [1, 3, args[2], args[3]])
+                
+                def counter = 0
+                
+                while (childA.size() > sizeLimit && counter <= 50) {
+                    childA = problem.tweak(children[0], doFull, [1, 3, args[2], args[3]])
+                    if(counter == 50){
+                        childA = parentA.genome
+                    }
+                    counter++
+                }
+                
+                counter = 0
+                
+                while (childB.size() > sizeLimit && counter <= 50) {
+                    childB = problem.tweak(children[1], doFull, [1, 3, args[2], args[3]])
+                    if(counter == 50){
+                        childB = parentB.genome
+                    }
+                    counter++
+                }
 
                 endingPopulation.add(new TreeGenomeFitnessPair(childA, problem.quality(childA), childA.size(), sizeLimit))
                 endingPopulation.add(new TreeGenomeFitnessPair(childB, problem.quality(childB), childB.size(), sizeLimit))
             }
             startingPopulation = endingPopulation
+            println best
+            println getAverageSize(startingPopulation)
         }
         return best
+    }
+    
+    private getAverageSize(population){
+        def total = 0
+        population.each {
+            total += it.size
+        }
+        total/population.size()
     }
 
     String toString() {

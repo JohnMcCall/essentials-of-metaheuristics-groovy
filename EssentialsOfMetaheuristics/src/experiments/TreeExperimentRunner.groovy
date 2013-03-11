@@ -11,7 +11,7 @@ import populationMethods.TreeGeneticAlgorithm
 
 class TreeExperimentRunner {
     
-    static runExperiment(searchers, problems, numRuns = 1) {
+    static runExperiment(searchers, problems, numRuns = 10) {
         def popsize = 1
         def selector = new TournamentSelection()
         def crossover = new Crossover()
@@ -37,8 +37,8 @@ class TreeExperimentRunner {
             for (s in searchers) {
                 for (i in 0..<numRuns) {
                     p.evalCount = 0
-                    def result = s.minimize(p, popsize, selector, crossover.subtreeCrossover, args)
-                    println "${s.toString()}\t${p.toString()}\t${p.quality(result)}"
+                    def genome = s.minimize(p, popsize, selector, crossover.subtreeCrossover, args)
+                    println "${s.toString()}\t${p.toString()}\t${genome.fitness}"
                 }
             }
         }
@@ -46,10 +46,13 @@ class TreeExperimentRunner {
 
     static main(args) {
         def searchers = [
-            new TreeGeneticAlgorithm(sizeLimit : 50)
+            new TreeGeneticAlgorithm(sizeLimit : 75)
         ]
         def problems = [
-            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 1000)
+            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 500),
+            new SymbolicRegressionSinX(numPoints : 10, maxIterations : 500),
+            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 1000),
+            new SymbolicRegressionSinX(numPoints : 10, maxIterations : 1000)
         ]
         // It would be nice to collect the total time here and include it in the
         // output.

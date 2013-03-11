@@ -13,7 +13,7 @@ class TreeGenomeFitnessPair implements Comparable{
         this.sizeLimit = sizeLimit
 
         if(size > sizeLimit) {
-            this.fitness = 999999
+            this.fitness = Integer.MAX_VALUE
         }
     }
 
@@ -29,6 +29,6 @@ class TreeGenomeFitnessPair implements Comparable{
     }
 
     public String toString() {
-        return "<${fitness}, ${genome}>"
+        return "<${fitness}, ${size}, ${genome}>"
     }
 }
