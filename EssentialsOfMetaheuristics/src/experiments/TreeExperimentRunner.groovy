@@ -51,7 +51,7 @@ class TreeExperimentRunner {
             for (s in searchers) {
                 for (i in 0..<numRuns) {
                     p.evalCount = 0
-                    def genome = s.minimize(p, popsize, selector, crossover.subtreeCrossover, EPargs)
+                    def genome = s.minimize(p, popsize, selector, crossover.subtreeCrossover, SRargs)
                     println "${s.toString()}\t${p.toString()}\t${genome.fitness}"
                 }
             }
@@ -63,13 +63,13 @@ class TreeExperimentRunner {
             new TreeGeneticAlgorithm(sizeLimit : 75)
         ]
         def problems = [
-//            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 500),
-//            new SymbolicRegressionSinX(numPoints : 10, maxIterations : 500),
+            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 500),
+            new SymbolicRegressionSinX(numPoints : 10, maxIterations : 500),
 //            new SymbolicRegressionSinX(numPoints : 20, maxIterations : 1000),
 //            new SymbolicRegressionSinX(numPoints : 10, maxIterations : 1000)
             
-            new Even4Parity(maxIterations : 500),
-            new Even4Parity(maxIterations : 1000)
+//            new Even4Parity(maxIterations : 500),
+//            new Even4Parity(maxIterations : 1000)
         ]
         // It would be nice to collect the total time here and include it in the
         // output.

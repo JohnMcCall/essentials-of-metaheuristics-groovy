@@ -1,5 +1,6 @@
 package operators;
 
+import populationMethods.GenomeFitnessPair
 import problems.OnesMax
 import spock.lang.Specification;
 
@@ -15,13 +16,15 @@ class TournamentSelecionTest extends Specification {
 		def problem = new OnesMax()
 		def better = [1, 1, 1, 1]
 		def worser = [0, 0, 0, 0]
-		def population = [worser, better]
+		def genome1 = new GenomeFitnessPair(genome: better, fitness: 1)
+		def genome2 = new GenomeFitnessPair(genome: worser, fitness: 0)
+		def population = [genome1, genome2]
 		
 		when:
 		def choice = ts.select(problem, population)
 		
 		then:
-		choice == better
+		choice == genome1
 	}
 
 	def "select returns the 'better' option on tournaments of size 10 with pop size 3"() {
@@ -31,12 +34,15 @@ class TournamentSelecionTest extends Specification {
 		def better = [1, 1, 1, 1]
 		def middle = [1, 0, 1, 0]
 		def worser = [0, 0, 0, 0]
-		def population = [worser, better, middle]
+		def genome1 = new GenomeFitnessPair(genome: better, fitness: 2)
+		def genome2 = new GenomeFitnessPair(genome: middle, fitness: 1)
+		def genome3 = new GenomeFitnessPair(genome: worser, fitness: 0)
+		def population = [genome1, genome2, genome3]
 		
 		when:
 		def choice = ts.select(problem, population)
 		
 		then:
-		choice == better
+		choice == genome1
 	}
 }
