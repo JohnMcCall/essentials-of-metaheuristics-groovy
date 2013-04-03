@@ -17,13 +17,14 @@ class TestGateKeeperBattle extends Specification {
 	 * distance : the coefficient for the distance between the point and the enemy
 	 */
 	def id
+	def movementCode = ""
 	def robotBuilder
 	def battleRunner
 
 	def setup() {
 		Random random = new Random()
 		id = random.nextInt(1000000)
-        def values = ["id" : id]
+        def values = ["id" : id, "movementCode" : movementCode]
 
 		robotBuilder = new RobotBuilder("templates/GateKeeperOS.template")
 		robotBuilder.buildJarFile(values)

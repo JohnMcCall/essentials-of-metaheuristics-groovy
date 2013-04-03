@@ -29,11 +29,14 @@ public class Individual_${id} extends AdvancedRobot {
 		int mLen = 28;
 		int indX;
 		double absB = e.getBearingRadians();
+		
+//-------------------------------------------------------------------------------------------------------------------
 
-		   // Random Movement  ------- This will be Evolved Eventually!
-		   if(eEner > (eEner = e.getEnergy())) {
-		      setAhead(Math.random()*640-320);
-		   }
+		   // Evolved Movement
+		   ${movementCode}
+		   
+//-------------------------------------------------------------------------------------------------------------------
+		   
 		   // Pattern Matcher
 		   eLog = String.valueOf( (char)Math.round(e.getVelocity() * Math.sin(e.getHeadingRadians() - (absB+=getHeadingRadians())))).concat(eLog);
 		   while((indX = eLog.indexOf(eLog.substring(0, mLen--), (i = (int)((e.getDistance())/12.8)))) < 0);

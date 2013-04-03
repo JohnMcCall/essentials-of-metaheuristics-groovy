@@ -12,6 +12,7 @@ class TestGateKeeperClassCreation extends Specification {
      * distance : the coefficient for the distance between the point and the enemy
      */
     def id
+	def movementCode = ""
 	def robotBuilder
 
     def setup() {
@@ -27,7 +28,7 @@ class TestGateKeeperClassCreation extends Specification {
      */
     def "Confirm that we can create a Java source file for an individual"() {
         given:
-        def values = ["id" : id]
+        def values = ["id" : id, "movementCode" : movementCode]
 
         when:
         robotBuilder.buildJavaFile(values)
@@ -46,7 +47,7 @@ class TestGateKeeperClassCreation extends Specification {
      */
     def "Confirm that we can create a Java class file for an individual"() {
         given:
-        def values = ["id" : id]
+        def values = ["id" : id, "movementCode" : movementCode]
 
         when:
         robotBuilder.buildClassFile(values)
@@ -67,7 +68,7 @@ class TestGateKeeperClassCreation extends Specification {
      */
     def "Confirm that we can create a jar file for an individual"() {
         given:
-        def values = ["id" : id]
+        def values = ["id" : id, "movementCode" : movementCode]
 
         when:
         robotBuilder.buildJarFile(values)
