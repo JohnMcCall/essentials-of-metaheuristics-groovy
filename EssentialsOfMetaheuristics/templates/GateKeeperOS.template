@@ -1,0 +1,57 @@
+package evolved;
+
+
+import robocode.*;
+import robocode.util.*;
+
+public class Individual_${id} extends AdvancedRobot {
+	
+	// GateKeeper made by Exauge
+	// Current Version 1.1.121g - 20:39, 05-31-2010
+	// This robot uses a Pattern matching, Infinity Lock Radar, and Oscillator Movement
+	// Credits to Robar for a pattern matcher based on BlackWidow's
+
+	/* Version History:
+	 * 1.0 - Uses Random movement, Infinity Lock, and Pattern Matching
+	 * 1.1 - optimized for codesize a little more, added a little antiram for better scoring ;)
+	 */
+
+	static String eLog = "0000000000000000000000008888";
+	static double eEner;
+	
+	public void run() {
+		setTurnRadarRight(Double.POSITIVE_INFINITY); // Radar Lock
+	}
+	
+	public void onScannedRobot(ScannedRobotEvent e) {
+		// Local Variables
+		int i;
+		int mLen = 28;
+		int indX;
+		double absB = e.getBearingRadians();
+
+		   // Random Movement  ------- This will be Evolved Eventually!
+		   if(eEner > (eEner = e.getEnergy())) {
+		      setAhead(Math.random()*640-320);
+		   }
+		   // Pattern Matcher
+		   eLog = String.valueOf( (char)Math.round(e.getVelocity() * Math.sin(e.getHeadingRadians() - (absB+=getHeadingRadians())))).concat(eLog);
+		   while((indX = eLog.indexOf(eLog.substring(0, mLen--), (i = (int)((e.getDistance())/12.8)))) < 0);
+		   do{
+			   absB += Math.asin(((byte)eLog.charAt(indX--))/e.getDistance());
+		   }
+		   while(--i > 0);
+		   setTurnGunRightRadians(Utils.normalRelativeAngle(absB-getGunHeadingRadians()));
+	       if(e.getDistance() > 70){
+	            setTurnRightRadians(Math.cos(e.getBearingRadians()));
+	            if(getEnergy() > 5){
+	               setFire(2.4);
+	            }
+	       }
+	       else{
+	          setFire(3);
+	       }
+
+      setTurnRadarLeft(getRadarTurnRemaining()); // Radar Lock
+	}
+}

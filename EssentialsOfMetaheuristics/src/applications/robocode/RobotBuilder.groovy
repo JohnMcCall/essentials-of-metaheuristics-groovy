@@ -18,7 +18,7 @@ class RobotBuilder {
         def id = values['id']
         def fileNamePrefix = "Individual_${id}"
         def command = "jar -cf ${fileNamePrefix}.jar"
-        [".java", ".class", "\$MicroEnemy.class", ".properties"].each { suffix ->
+        [".java", ".class", ".properties"].each { suffix ->
             command += " ${robotPackage}/${fileNamePrefix}${suffix}"
         }
         def proc = command.execute(null, new File(robotDirectory))
