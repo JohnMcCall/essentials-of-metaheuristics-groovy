@@ -38,6 +38,10 @@ class InternalNode extends AbstractNode {
 		}
 		foundNode.children.remove(listIndex)
 	}
+	
+	def makeJava() {
+		function.makeJava(children)
+	}
 
 
     String toString() {

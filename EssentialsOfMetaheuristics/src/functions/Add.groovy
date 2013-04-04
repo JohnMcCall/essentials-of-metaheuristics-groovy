@@ -9,9 +9,15 @@ class Add implements FunctionInterface {
 	String toString(){
 		"Name: " + name
 	}
+	
+	String makeJava(list) {
+		def leftChild = list[0]
+		def rightChild = list[1]
+		leftChild.makeJava() + " + " +  rightChild.makeJava()
+	}
     
-        def isEqual(function) {
-            this.name == function.name
-        }
+    def isEqual(function) {
+        this.name == function.name
+    }
 
 }

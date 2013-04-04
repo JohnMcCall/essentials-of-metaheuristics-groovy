@@ -13,4 +13,10 @@ class Divide implements FunctionInterface {
         def isEqual(function) {
             this.name == function.name
         }
+		
+		String makeJava(list) {
+			def leftChild = list[0]
+			def rightChild = list[1]
+			leftChild.makeJava() + " / " +  rightChild.makeJava()
+		}
 }

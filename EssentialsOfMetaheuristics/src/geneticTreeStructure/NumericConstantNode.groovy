@@ -2,7 +2,7 @@ package geneticTreeStructure
 
 class NumericConstantNode extends AbstractNode {
 	
-	def NumericConstantNode(int value){
+	def NumericConstantNode(value){
 		this.value = value
 	}
 	
@@ -12,6 +12,10 @@ class NumericConstantNode extends AbstractNode {
 	
 	String toString(){
 		"Value: " + value
+	}
+	
+	def makeJava() {
+		value
 	}
 
 }

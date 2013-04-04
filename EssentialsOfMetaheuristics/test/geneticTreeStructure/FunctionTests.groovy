@@ -35,5 +35,22 @@ class FunctionTests extends Specification {
         multiply.doMath(10, 2) == 20
         multiply.doMath(9, -4) == -36
     }
+	
+	def "testing ahead"() {
+		def ahead = new Ahead()
+		def list = [new NumericConstantNode(5)]
+		
+		def add = new InternalNode(new Add())
+		def child1 = new NumericConstantNode(2)
+		def child2 = new NumericConstantNode(6)
+		add = add.addChild(child1)
+		add = add.addChild(child2)
+		
+		def advancedList = [add]
+		expect:
+		list[0].value == 5
+		"ahead(5);" == ahead.makeJava(list)
+		"ahead(2 + 6);" == ahead.makeJava(advancedList)
+	}
 
 }
