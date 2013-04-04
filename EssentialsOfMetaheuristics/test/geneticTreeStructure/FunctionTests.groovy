@@ -52,5 +52,56 @@ class FunctionTests extends Specification {
 		"ahead(5);" == ahead.makeJava(list)
 		"ahead(2 + 6);" == ahead.makeJava(advancedList)
 	}
+	
+	def "testing back"() {
+		def back = new Back()
+		def list = [new NumericConstantNode(5)]
+		
+		def add = new InternalNode(new Add())
+		def child1 = new NumericConstantNode(2)
+		def child2 = new NumericConstantNode(6)
+		add = add.addChild(child1)
+		add = add.addChild(child2)
+		
+		def advancedList = [add]
+		expect:
+		list[0].value == 5
+		"back(5);" == back.makeJava(list)
+		"back(2 + 6);" == back.makeJava(advancedList)
+	}
+	
+	def "testing turn left"() {
+		def turnLeft = new TurnLeft()
+		def list = [new NumericConstantNode(Math.PI/2)]
+		
+		def add = new InternalNode(new Add())
+		def child1 = new NumericConstantNode(2)
+		def child2 = new NumericConstantNode(6)
+		add = add.addChild(child1)
+		add = add.addChild(child2)
+		
+		def advancedList = [add]
+		expect:
+		list[0].value == Math.PI/2
+		"turnLeftRadians(${Math.PI/2});" == turnLeft.makeJava(list)
+		"turnLeftRadians(2 + 6);" == turnLeft.makeJava(advancedList)
+	}
+	
+	def "testing turn right"() {
+		def turnRight = new TurnRight()
+		def list = [new NumericConstantNode(Math.PI/2)]
+		
+		def add = new InternalNode(new Add())
+		def child1 = new NumericConstantNode(2)
+		def child2 = new NumericConstantNode(6)
+		add = add.addChild(child1)
+		add = add.addChild(child2)
+		
+		def advancedList = [add]
+		expect:
+		list[0].value == Math.PI/2
+		"turnRightRadians(${Math.PI/2});" == turnRight.makeJava(list)
+		"turnRightRadians(2 + 6);" == turnRight.makeJava(advancedList)
+	}
 
 }
