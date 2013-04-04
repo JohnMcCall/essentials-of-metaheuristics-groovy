@@ -103,5 +103,13 @@ class FunctionTests extends Specification {
 		"turnRightRadians(${Math.PI/2});" == turnRight.makeJava(list)
 		"turnRightRadians(2 + 6);" == turnRight.makeJava(advancedList)
 	}
+	
+	def "testing getEnergy"() {
+		def getEnergy = new GetEnergy()
+		def list
+		
+		expect:
+		"getEnergy();" == getEnergy.makeJava(list)
+	}
 
 }
