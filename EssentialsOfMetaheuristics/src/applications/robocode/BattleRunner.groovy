@@ -19,11 +19,11 @@ class BattleRunner {
         template = engine.createTemplate(new File(templateFileName))
     }
 
-    def buildBattleFile(id) {
+    def buildBattleFile(id, opponent) {
         File battleFile = new File("${robotDirectory}/evolve.battle")
         battleFile.delete()
         battleFile.createNewFile()
-        def result = template.make(["id" : id])
+        def result = template.make(["id" : id, "opponent" : opponent])
         battleFile << result.toString()
     }
 

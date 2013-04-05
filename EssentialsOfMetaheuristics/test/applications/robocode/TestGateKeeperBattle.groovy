@@ -34,7 +34,7 @@ class TestGateKeeperBattle extends Specification {
 
 	def "Check that the battle file is correctly constructed"() {
 		when:
-		battleRunner.buildBattleFile(id)
+		battleRunner.buildBattleFile(id, "sample.Walls")
 
 		then:
 		confirmBattleFile()
@@ -42,7 +42,7 @@ class TestGateKeeperBattle extends Specification {
 
 	def "Check that we can run a battle and extract the scores"() {
 		given:
-		battleRunner.buildBattleFile(id)
+		battleRunner.buildBattleFile(id, "sample.Walls")
 
         when:
 		def score = battleRunner.runBattle(id)
