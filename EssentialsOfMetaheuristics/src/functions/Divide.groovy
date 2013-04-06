@@ -1,22 +1,33 @@
 package functions
 
 class Divide implements FunctionInterface {
-        def name = "Divide"
-        def arity = 2
-        
-        def doMath = { x, y -> if(y == 0) {1} else {x / y} }
-        
-        String toString(){
-                "Name: " + name
-        }
+    def name = "Divide"
+    def arity = 2
 
-        def isEqual(function) {
-            this.name == function.name
+    def doMath = { x, y ->
+        if(y == 0 || (x == null && y == null)) {
+            1
         }
-		
-		String makeJava(list) {
-			def leftChild = list[0]
-			def rightChild = list[1]
-			leftChild.makeJava() + " / " +  rightChild.makeJava()
-		}
+        else if(x == null) {
+            y
+        } else if(y == null) {
+            x
+        } else {
+            x / y
+        }
+    }
+
+    String toString(){
+        "Name: " + name
+    }
+
+    def isEqual(function) {
+        this.name == function.name
+    }
+
+    String makeJava(list) {
+        def leftChild = list[0]
+        def rightChild = list[1]
+        leftChild.makeJava() + " / " +  rightChild.makeJava()
+    }
 }

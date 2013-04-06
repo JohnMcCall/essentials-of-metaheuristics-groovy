@@ -4,7 +4,17 @@ class Subtract implements FunctionInterface {
         def name = "Subtract"
         def arity = 2
         
-        def doMath = {x, y -> x - y}
+        def doMath = { x, y ->
+        if(x==null && y == null) {
+            1
+        } else if(x == null) {
+            y
+        } else if(y == null) {
+            x
+        } else {
+            x - y
+        }
+    }
         
         String toString(){
                 "Name: " + name

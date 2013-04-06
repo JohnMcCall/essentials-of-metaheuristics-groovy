@@ -42,8 +42,6 @@ class RobocodeExperimentRunner {
 			{-> new InternalNode(back)},
 			{-> new InternalNode(getEnergy)},
 			{-> new InternalNode(getVelocity)},
-			{-> new InternalNode(setMaxTurnRate)},
-			{-> new InternalNode(setMaxVelocity)},
 			{-> new InternalNode(turnLeft)},
 			{-> new InternalNode(turnRight)}
 		]
@@ -66,7 +64,7 @@ class RobocodeExperimentRunner {
 				for (i in 0..<numRuns) {
 					p.evalCount = 0
 					def genome = s.minimize(p, popsize, selector, crossover.subtreeCrossover, args)
-                    println "${s.toString()}\t${p.toString()}\t${genome.fitness}"
+                                        println "${s.toString()}\t${p.toString()}\t${genome.fitness}"
 				}
 			}
 		}
