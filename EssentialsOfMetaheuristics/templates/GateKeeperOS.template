@@ -31,12 +31,7 @@ public class Individual_${id} extends AdvancedRobot {
 		double absB = e.getBearingRadians();
 		
 //-------------------------------------------------------------------------------------------------------------------
-		   // Variables used in our functions
-		   int add = 0;
-		   int sub = 0;
-		   int mult = 1;
-		   int div = 1;
-		   
+
 		   // Evolved Movement
 		   //setMaxVelocity(); --> To Be Evolved?
 		   //setMaxTurnRate(); --> To Be Evolved?

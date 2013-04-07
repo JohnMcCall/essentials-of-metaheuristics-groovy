@@ -5,12 +5,14 @@ class TreeGenomeFitnessPair implements Comparable{
     protected def fitness
     protected def size
     def sizeLimit = -1
+    def id
 
-    def TreeGenomeFitnessPair(genome, fitness, size, sizeLimit) {
+    def TreeGenomeFitnessPair(genome, fitness, size, sizeLimit, id) {
         this.genome = genome
         this.fitness = fitness
         this.size = size
         this.sizeLimit = sizeLimit
+        this.id = id
 
         if(size > sizeLimit) {
             this.fitness = Integer.MAX_VALUE

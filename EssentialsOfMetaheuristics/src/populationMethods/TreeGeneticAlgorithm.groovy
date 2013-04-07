@@ -13,6 +13,7 @@ class TreeGeneticAlgorithm {
     def geneticTree = new GeneticTree()
     def doFull = geneticTree.doFull
     def sizeLimit = -1
+    def static id = 0
 
     // Our Algorithm takes a Genetic Algorithm Problem, a desired population size
     def minimize(problem, populationSize=popsize, selector=new TournamentSelection(), crossover=new Crossovers().onePointCrossover, args) {
@@ -22,11 +23,12 @@ class TreeGeneticAlgorithm {
 
         popsize.times {
             def toAdd = problem.random(doFull, args)
-            startingPopulation.add(new TreeGenomeFitnessPair(toAdd, problem.quality(toAdd), toAdd.size(), sizeLimit)) // Add a new random individual
+            startingPopulation.add(new TreeGenomeFitnessPair(toAdd, problem.quality(toAdd), toAdd.size(), sizeLimit, id)) // Add a new random individual
+            id++
         }
 
         def bestTree = problem.create(doFull, args)
-        def best = new TreeGenomeFitnessPair(bestTree, problem.quality(bestTree), bestTree.size(), sizeLimit)
+        def best = new TreeGenomeFitnessPair(bestTree, problem.quality(bestTree), bestTree.size(), sizeLimit, id=-1)
         while(!problem.terminate(best.genome, best.fitness)) {
             for(def individual: startingPopulation) {
                 if(best.compareTo(individual) < 0) {
@@ -65,8 +67,10 @@ class TreeGeneticAlgorithm {
                     counter++
                 }
 
-                endingPopulation.add(new TreeGenomeFitnessPair(childA, problem.quality(childA), childA.size(), sizeLimit))
-                endingPopulation.add(new TreeGenomeFitnessPair(childB, problem.quality(childB), childB.size(), sizeLimit))
+                endingPopulation.add(new TreeGenomeFitnessPair(childA, problem.quality(childA), childA.size(), sizeLimit, id))
+                id++
+                endingPopulation.add(new TreeGenomeFitnessPair(childB, problem.quality(childB), childB.size(), sizeLimit, id))
+                id++
             }
             startingPopulation = endingPopulation
             //println best

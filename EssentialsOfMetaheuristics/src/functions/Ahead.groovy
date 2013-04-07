@@ -4,7 +4,8 @@ import geneticTreeStructure.InternalNode
 
 class Ahead implements FunctionInterface {
 	def name = "Ahead"
-	def arity = 1
+	def arity = 2
+        def random = new Random()
 		
 	String toString() {
 		"Name: " + name
@@ -12,7 +13,9 @@ class Ahead implements FunctionInterface {
 	
 	// takes a list of the node's children
 	String makeJava(list){
-		"ahead(" + list[0].makeJava() + ");"
+		def toReturn = "ahead( ${random.nextInt(51)+10} );\n"
+                list.each {toReturn += it.makeJava()}
+                toReturn
 	}
     
     def isEqual(function) {
