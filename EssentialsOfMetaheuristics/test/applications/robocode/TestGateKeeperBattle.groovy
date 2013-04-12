@@ -17,7 +17,7 @@ class TestGateKeeperBattle extends Specification {
 	 * distance : the coefficient for the distance between the point and the enemy
 	 */
 	def id
-	def movementCode = "getVelocity();\ngetEnergy();"
+	def movementCode = "ahead( 21 );ahead( 27 );ahead( 47 );"
 	def robotBuilder
 	def battleRunner
 

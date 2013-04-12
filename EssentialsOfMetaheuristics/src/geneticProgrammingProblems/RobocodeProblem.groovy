@@ -14,8 +14,6 @@ class RobocodeProblem {
     def robotBuilder = new RobotBuilder("templates/GateKeeperOS.template")
     def battleRunner = new BattleRunner("templates/battle.template")
     def opponents = [
-        "sample.Crazy",
-        "sample.Fire",
         "sample.SpinBot",
         "sample.VelociRobot"
     ]
@@ -23,7 +21,6 @@ class RobocodeProblem {
 
     def quality = { tree ->
         evalCount++
-        //println("Evalcount: " + evalCount)
 
         def movementCode = tree.makeJava()
         def values = ["id" : id, "movementCode" : movementCode]

@@ -23,7 +23,7 @@ class RobotBuilder {
         }
         def proc = command.execute(null, new File(robotDirectory))
         proc.waitFor()
-        println(proc.in.text)
+        //println(proc.in.text)
         assert proc.err.text.equals("")
         assert proc.exitValue() == 0
     }
@@ -62,7 +62,7 @@ class RobotBuilder {
 
     private File createFile(javaFileName) {
         new File(robotDirectory).mkdir()
-		new File("${robotDirectory}/${robotPackage}").mkdir()
+        new File("${robotDirectory}/${robotPackage}").mkdir()
         File javaFile = new File("${robotDirectory}/${robotPackage}/${javaFileName}")
         assert !javaFile.exists()
         javaFile.createNewFile()

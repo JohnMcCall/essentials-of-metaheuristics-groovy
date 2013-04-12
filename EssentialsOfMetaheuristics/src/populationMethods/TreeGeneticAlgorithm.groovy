@@ -31,7 +31,7 @@ class TreeGeneticAlgorithm {
         def best = new TreeGenomeFitnessPair(bestTree, problem.quality(bestTree), bestTree.size(), sizeLimit, id=-1)
         while(!problem.terminate(best.genome, best.fitness)) {
             for(def individual: startingPopulation) {
-                if(best.compareTo(individual) < 0) {
+                if(best.compareTo(individual) > 0) {
                     best = individual
                 }
 
