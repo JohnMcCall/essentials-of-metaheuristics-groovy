@@ -14,7 +14,7 @@ class TurnLeft implements FunctionInterface {
 	
 	// takes a list of the node's children
         String makeJava(list){
-                def toReturn = "turnLeft( ${random.nextInt(361)} );\n"
+                def toReturn = "setTurnLeft( ${random.nextInt(360) + 1} );\n"
                 list.each {toReturn += it.makeJava()}
                 toReturn
         }

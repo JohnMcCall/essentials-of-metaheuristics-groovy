@@ -14,8 +14,9 @@ class RobocodeProblem {
     def robotBuilder = new RobotBuilder("templates/GateKeeperOS.template")
     def battleRunner = new BattleRunner("templates/battle.template")
     def opponents = [
-        "sample.SpinBot",
-        "sample.VelociRobot"
+        "evolved.ChaChaR1",
+        "evolved.HappyProgrammersR1",
+        "nicsEvolved.NicRoundOne"
     ]
     def static id = 0;
 

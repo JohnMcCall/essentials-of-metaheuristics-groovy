@@ -17,7 +17,7 @@ class TestGateKeeperBattle extends Specification {
 	 * distance : the coefficient for the distance between the point and the enemy
 	 */
 	def id
-	def movementCode = "ahead( 21 );ahead( 27 );ahead( 47 );"
+	def movementCode = "setTurnRight( 245 );setBack( 56 * moveDirection );setAhead( 44 * moveDirection );"
 	def robotBuilder
 	def battleRunner
 
@@ -59,7 +59,7 @@ class TestGateKeeperBattle extends Specification {
         }
         assert interestingLines.size() == 1
 		assert interestingLines[0].indexOf("sample.Walls") >= 0
-        assert interestingLines[0].indexOf("evolved.Individual_${id}") >= 0
+        assert interestingLines[0].indexOf("evolved.GateKeeper_${id}") >= 0
         return true
 	}
 }

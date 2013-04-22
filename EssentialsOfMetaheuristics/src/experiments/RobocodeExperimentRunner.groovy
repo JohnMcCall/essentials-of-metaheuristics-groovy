@@ -10,8 +10,8 @@ import geneticTreeStructure.NumericConstantNode
 
 class RobocodeExperimentRunner {
 
-    static runExperiment(searchers, problems, numRuns = 30) {
-        def popsize = 25
+    static runExperiment(searchers, problems, numRuns = 5) {
+        def popsize = 50
         def selector = new TournamentSelection()
         def crossover = new Crossover()
 
@@ -19,8 +19,6 @@ class RobocodeExperimentRunner {
 
         def ahead = new Ahead()
         def back = new Back()
-        //def setMaxTurnRate = new SetMaxTurnRate()
-        //def setMaxVelocity = new SetMaxVelocity()
         def turnLeft = new TurnLeft()
         def turnRight = new TurnRight()
 
@@ -32,16 +30,10 @@ class RobocodeExperimentRunner {
             {-> new InternalNode(back)},
             {-> new InternalNode(turnLeft)},
             {-> new InternalNode(turnRight)},
-            //{-> new InternalNode(setMaxTurnRate)},
-            //{-> new InternalNode(setMaxVelocity)}
         ]
 
         def terminalSet = [
             {-> new NumericConstantNode(rand.nextInt(101))},
-            //			{-> new NumericConstantNode(0)},
-            //			{-> new NumericConstantNode(1)},
-            //                        {-> new NumericConstantNode(Math.PI)},
-            //                        {-> new NumericConstantNode(2)}
         ]
 
         def args = [
@@ -70,7 +62,8 @@ class RobocodeExperimentRunner {
         File dir = new File("${userHome}/robocode/robots")
         
         for(File file: dir.listFiles()){
-            if(file.getName() != "robot.database") {
+            if(file.getName() != "robot.database" && file.getName() != "chacha-mermaids-ec1.jar" && 
+                file.getName() != "HappyProgrammersR1.jar" && file.getName() != "NicRoundOne.jar") {
                 file.delete()
             }
         }
@@ -93,7 +86,7 @@ class RobocodeExperimentRunner {
             new TreeGeneticAlgorithm(sizeLimit : 20)
         ]
         def problems = [
-            new RobocodeProblem(maxIterations : 500)
+            new RobocodeProblem(maxIterations : 1500)
         ]
         cleanup()
         runExperiment(searchers, problems)

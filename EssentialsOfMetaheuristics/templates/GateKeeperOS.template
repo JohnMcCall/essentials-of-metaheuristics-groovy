@@ -4,7 +4,7 @@ package evolved;
 import robocode.*;
 import robocode.util.*;
 
-public class Individual_${id} extends AdvancedRobot {
+public class GateKeeper_${id} extends AdvancedRobot {
 	
 	// GateKeeper made by Exauge
 	// Current Version 1.1.121g - 20:39, 05-31-2010
@@ -18,6 +18,7 @@ public class Individual_${id} extends AdvancedRobot {
 
 	static String eLog = "0000000000000000000000008888";
 	static double eEner;
+	static double moveDirection = 1;
 	
 	public void run() {
 		setTurnRadarRight(Double.POSITIVE_INFINITY); // Radar Lock
@@ -59,5 +60,9 @@ public class Individual_${id} extends AdvancedRobot {
 	       }
 
       setTurnRadarLeft(getRadarTurnRemaining()); // Radar Lock
+	}
+	
+	public void onHitWall(HitWallEvent e) {
+		moveDirection *= -1;
 	}
 }

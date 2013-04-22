@@ -14,7 +14,7 @@ class Back implements FunctionInterface {
 
     // takes a list of the node's children
     String makeJava(list){
-        def toReturn = "back( ${random.nextInt(51)+10} );\n"
+        def toReturn = "setBack( ${random.nextInt(51)+10} * moveDirection );\n"
         list.each {toReturn += it.makeJava()}
         toReturn
     }

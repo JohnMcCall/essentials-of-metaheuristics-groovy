@@ -85,43 +85,43 @@ class TestGateKeeperClassCreation extends Specification {
     }
 
     def confirmJavaFileExists() {
-        File file = new File("evolved_robots/evolved/Individual_${id}.java")
+        File file = new File("evolved_robots/evolved/GateKeeper_${id}.java")
         def contents = file.readLines()
         def interestingLines = contents.findAll { line ->
             (line.indexOf("public class") >= 0)
         }
         // There's actually a sixth matching line because of the MicroEnemy inner class
         assert interestingLines.size() == 1
-        assert interestingLines[0].indexOf("Individual_${id}") >= 0
+        assert interestingLines[0].indexOf("GateKeeper_${id}") >= 0
         return true
     }
 
     def confirmClassFileExists() {
-        File file = new File("evolved_robots/evolved/Individual_${id}.class")
+        File file = new File("evolved_robots/evolved/GateKeeper_${id}.class")
         assert file.exists()
         return true
     } 
     
     def confirmJarFileExists() {
-        File file = new File("evolved_robots/Individual_${id}.jar")
+        File file = new File("evolved_robots/GateKeeper_${id}.jar")
         assert file.exists()
         def entryNames = new JarFile(file).entries().collect { it.name }
-        def targets = ["evolved/Individual_${id}.class", 
-            "evolved/Individual_${id}.java",
-            "evolved/Individual_${id}.properties"]
+        def targets = ["evolved/GateKeeper_${id}.class", 
+            "evolved/GateKeeper_${id}.java",
+            "evolved/GateKeeper_${id}.properties"]
         entryNames.containsAll(targets)
         return true
     }
     
     def removeJavaFile() {
-        new File("evolved_robots/evolved/Individual_${id}.java").delete()
+        new File("evolved_robots/evolved/GateKeeper_${id}.java").delete()
     }
 
     def removeClassFile() {
-        new File("evolved_robots/evolved/Individual_${id}.class").delete()
+        new File("evolved_robots/evolved/GateKeeper_${id}.class").delete()
     }
     
     def removePropertiesFile() {
-        new File("evolved_robots/evolved/Individual_${id}.properties").delete()
+        new File("evolved_robots/evolved/GateKeeper_${id}.properties").delete()
     }
 }
