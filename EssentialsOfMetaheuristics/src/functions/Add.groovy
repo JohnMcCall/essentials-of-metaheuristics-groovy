@@ -24,7 +24,7 @@ class Add implements FunctionInterface {
         def leftChild = list[0]
         def rightChild = list[1]
 
-        def toReturn = "${doMath(leftChild.makeJava(), rightChild.makeJava())}"
+        def toReturn = "(${leftChild.makeJava()} + ${rightChild.makeJava()})"
 
         toReturn
     }

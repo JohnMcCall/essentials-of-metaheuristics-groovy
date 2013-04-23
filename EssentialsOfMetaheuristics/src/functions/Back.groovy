@@ -6,7 +6,8 @@ class Back implements FunctionInterface {
     def name = "Back"
     def arity = 2
     def random = new Random()
-
+    def treeMaker
+    def args
 
     String toString() {
         "Name: " + name
@@ -14,7 +15,10 @@ class Back implements FunctionInterface {
 
     // takes a list of the node's children
     String makeJava(list){
-        def toReturn = "setBack( ${random.nextInt(51)+10} * moveDirection );\n"
+        def tree = treeMaker.doFull(args)
+        def innerJava = tree.makeJava()
+
+        def toReturn = "setBack( ${innerJava} * moveDirection );\n"
         list.each {toReturn += it.makeJava()}
         toReturn
     }

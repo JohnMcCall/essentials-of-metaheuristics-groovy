@@ -13,5 +13,9 @@ class VariableNode extends AbstractNode {
 	String toString(){
 		"Value: " + value
 	}
+    
+        String makeJava() {
+            ""
+        }
 
 }

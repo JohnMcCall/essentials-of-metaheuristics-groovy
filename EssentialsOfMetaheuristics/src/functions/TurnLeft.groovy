@@ -6,7 +6,8 @@ class TurnLeft implements FunctionInterface {
 	def name = "TurnLeft"
 	def arity = 2
         def random = new Random()
-    
+        def treeMaker
+        def args
 		
 	String toString() {
 		"Name: " + name
@@ -14,7 +15,10 @@ class TurnLeft implements FunctionInterface {
 	
 	// takes a list of the node's children
         String makeJava(list){
-                def toReturn = "setTurnLeft( ${random.nextInt(360) + 1} );\n"
+                def tree = treeMaker.doFull(args)
+                def innerJava = tree.makeJava()
+        
+                def toReturn = "setTurnLeft( ${innerJava} );\n"
                 list.each {toReturn += it.makeJava()}
                 toReturn
         }

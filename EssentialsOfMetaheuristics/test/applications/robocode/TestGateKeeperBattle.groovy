@@ -17,8 +17,8 @@ class TestGateKeeperBattle extends Specification {
 	 * distance : the coefficient for the distance between the point and the enemy
 	 */
 	def id
-	def movementCode = "setTurnRight( 245 );setBack( 56 * moveDirection );setAhead( 44 * moveDirection );"
-	def robotBuilder
+	def movementCode = "setBack( ((180 * e.getHeading()) / (e.getDistance() * 180)) * moveDirection );setTurnLeft( ((e.getHeading() - e.getDistance()) * (180 * 315)) );setTurnRight( ((e.getHeading() + e.getBearing()) * (185 - e.getBearing())) );"
+    	def robotBuilder
 	def battleRunner
 
 	def setup() {

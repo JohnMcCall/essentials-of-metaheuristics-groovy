@@ -28,6 +28,9 @@ class Divide implements FunctionInterface {
     String makeJava(list) {
         def leftChild = list[0]
         def rightChild = list[1]
-        leftChild.makeJava() + " / " +  rightChild.makeJava()
+
+        def toReturn = "(${leftChild.makeJava()} / ${rightChild.makeJava()})"
+
+        toReturn
     }
 }

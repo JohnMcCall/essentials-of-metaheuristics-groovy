@@ -15,7 +15,7 @@ class NumericConstantNode extends AbstractNode {
 	}
 	
 	def makeJava() {
-		""
+		value
 	}
 
 }

@@ -5,8 +5,11 @@ import populationMethods.TreeGeneticAlgorithm
 import functions.*
 import geneticProgrammingProblems.RobocodeProblem
 import geneticTreeStructure.Crossover
+import geneticTreeStructure.GeneticTree
 import geneticTreeStructure.InternalNode
 import geneticTreeStructure.NumericConstantNode
+import geneticTreeStructure.TerminalFunctionNode
+import geneticTreeStructure.VariableNode
 
 class RobocodeExperimentRunner {
 
@@ -14,16 +17,50 @@ class RobocodeExperimentRunner {
         def popsize = 50
         def selector = new TournamentSelection()
         def crossover = new Crossover()
-
+        
+        def nodeTreeMaker = new GeneticTree()
+        
         def maxDepth = 4
-
-        def ahead = new Ahead()
-        def back = new Back()
-        def turnLeft = new TurnLeft()
-        def turnRight = new TurnRight()
-
-
+        
         def rand = new Random()
+        
+        def getHeading = new GetHeading()
+        def getBearing = new GetBearing()
+        def getDistance = new GetDistance()
+        
+        def add = new Add()
+        def subtract = new Subtract()
+        def multiply = new Multiply()
+        def divide = new Divide()
+        
+        def nodeFuntionSet = [
+            {-> new InternalNode(add)},
+            {-> new InternalNode(subtract)},
+            {-> new InternalNode(multiply)},
+            {-> new InternalNode(divide)},
+        ]
+        
+        def nodeTerminalSet = [
+            {-> new TerminalFunctionNode(getHeading)},
+            {-> new TerminalFunctionNode(getBearing)},
+            {-> new TerminalFunctionNode(getDistance)},
+            {-> new NumericConstantNode(rand.nextInt(361) + 1)},
+            {-> new NumericConstantNode(1)},
+            {-> new NumericConstantNode(180)}
+            
+        ]
+        
+        def nodeArgs = [
+            1,
+            3,
+            nodeFuntionSet,
+            nodeTerminalSet
+        ]
+
+        def ahead = new Ahead([args: nodeArgs, treeMaker: nodeTreeMaker])
+        def back = new Back([args: nodeArgs, treeMaker: nodeTreeMaker])
+        def turnLeft = new TurnLeft([args: nodeArgs, treeMaker: nodeTreeMaker])
+        def turnRight = new TurnRight([args: nodeArgs, treeMaker: nodeTreeMaker])
 
         def functionSet = [
             {-> new InternalNode(ahead)},
@@ -31,10 +68,11 @@ class RobocodeExperimentRunner {
             {-> new InternalNode(turnLeft)},
             {-> new InternalNode(turnRight)},
         ]
-
+        
         def terminalSet = [
-            {-> new NumericConstantNode(rand.nextInt(101))},
+            {-> new VariableNode("x")} //just want to ignore it
         ]
+        
 
         def args = [
             1,
@@ -42,7 +80,7 @@ class RobocodeExperimentRunner {
             functionSet,
             terminalSet
         ]
-
+        
         for (p in problems) {
             for (s in searchers) {
                 for (i in 0..<numRuns) {

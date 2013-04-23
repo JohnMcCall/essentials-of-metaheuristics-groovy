@@ -1,10 +1,10 @@
 package functions
 
 class Multiply implements FunctionInterface {
-        def name = "Multiply"
-        def arity = 2
-        
-        def doMath = { x, y ->
+    def name = "Multiply"
+    def arity = 2
+
+    def doMath = { x, y ->
         if(x==null && y == null) {
             1
         } else if(x == null) {
@@ -15,19 +15,21 @@ class Multiply implements FunctionInterface {
             x * y
         }
     }
-        
-        String toString(){
-                "Name: " + name
-        }
-        
-        def isEqual(function) {
-            this.name == function.name
-        }
-		
-		String makeJava(list) {
-			def leftChild = list[0]
-			def rightChild = list[1]
-			leftChild.makeJava() + " * " +  rightChild.makeJava()
-		}
 
+    String toString() {
+        "Name: " + name
+    }
+
+    def isEqual(function) {
+        this.name == function.name
+    }
+
+    String makeJava(list) {
+        def leftChild = list[0]
+        def rightChild = list[1]
+
+        def toReturn = "(${leftChild.makeJava()} * ${rightChild.makeJava()})"
+
+        toReturn
+    }
 }

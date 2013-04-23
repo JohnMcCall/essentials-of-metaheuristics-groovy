@@ -1,8 +1,7 @@
 package functions
 
-
-class GetVelocity implements FunctionInterface {
-        def name = "GetVelocity"
+class GetX implements FunctionInterface {
+        def name = "GetX"
         def arity = 0
                 
         String toString() {
@@ -11,7 +10,7 @@ class GetVelocity implements FunctionInterface {
         
         // takes a list of the node's children
         String makeJava(list){
-                "getVelocity();"
+                "getX()"
         }
     
     def isEqual(function) {
