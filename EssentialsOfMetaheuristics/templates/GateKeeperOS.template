@@ -1,8 +1,9 @@
 package evolved;
 
-
 import robocode.*;
 import robocode.util.*;
+import java.awt.geom.*;
+
 
 public class GateKeeper_${id} extends AdvancedRobot {
 	
@@ -19,8 +20,13 @@ public class GateKeeper_${id} extends AdvancedRobot {
 	static String eLog = "0000000000000000000000008888";
 	static double eEner;
 	static double moveDirection = 1;
+	static double battleFieldWidth;
+	static double battleFieldHeight;
 	
 	public void run() {
+		battleFieldWidth = getBattleFieldWidth();
+		battleFieldHeight = getBattleFieldHeight();
+		
 		setTurnRadarRight(Double.POSITIVE_INFINITY); // Radar Lock
 	}
 	
@@ -30,14 +36,28 @@ public class GateKeeper_${id} extends AdvancedRobot {
 		int mLen = 28;
 		int indX;
 		double absB = e.getBearingRadians();
+//-------------------------------------------------------------------------------------------------------------------
+		
+		// Wall avoidance code
+
+
+		 double eOffset;
+         double absbearing=e.getBearingRadians()+ getHeadingRadians();
+         double eDistance = e.getDistance();
+		 double goAngle;
+         eOffset =( Math.PI/2 + 1*0.8632457928499246) - eDistance*(0.8632457928499246/600);
+
+		 while(! new Rectangle2D.Double(18,18,getBattleFieldWidth()-36, getBattleFieldHeight()-36).
+         	contains(getX() + 160 * Math.sin(goAngle = absbearing + moveDirection * (eOffset -= .02)), getY() + 160 * Math.cos(goAngle))
+         );
 		
 //-------------------------------------------------------------------------------------------------------------------
 
 		   // Evolved Movement
-		   //setMaxVelocity(); --> To Be Evolved?
-		   //setMaxTurnRate(); --> To Be Evolved?
 		   
-		   ${movementCode};
+			setAhead( ${first} * moveDirection );
+			setAhead( ${second} * moveDirection );
+			setBack( ${third} * moveDirection );
 		   
 //-------------------------------------------------------------------------------------------------------------------
 		   
@@ -63,6 +83,13 @@ public class GateKeeper_${id} extends AdvancedRobot {
 	}
 	
 	public void onHitWall(HitWallEvent e) {
+		//double bearing = e.getBearing();
+		//turnRight(bearing);		
 		moveDirection *= -1;
 	}
+	
+	public void onHitRobot(HitRobotEvent e) {
+		moveDirection *= -1;
+	}
+	
 }

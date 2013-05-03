@@ -100,8 +100,7 @@ class RobocodeExperimentRunner {
         File dir = new File("${userHome}/robocode/robots")
         
         for(File file: dir.listFiles()){
-            if(file.getName() != "robot.database" && file.getName() != "chacha-mermaids-ec1.jar" && 
-                file.getName() != "HappyProgrammersR1.jar" && file.getName() != "NicRoundOne.jar") {
+            if(file.getName() != "HappyRobot526319.jar" && file.getName() != "HypeMachine_31.jar") {
                 file.delete()
             }
         }
